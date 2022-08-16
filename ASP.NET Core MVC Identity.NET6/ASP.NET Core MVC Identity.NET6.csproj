@@ -5,6 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>ASP.NET_Core_MVC_Identity.NET6</RootNamespace>
+    <UserSecretsId>a9aafc3a-f455-4ce9-8b5d-cbbc70b3c17c</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>

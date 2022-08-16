@@ -7,10 +7,10 @@ namespace ASP.NET_Core_MVC_Identity.NET6.Controllers;
 
 public class AccountController : Controller
 {
-    private readonly UserManager<IdentityUser> _userManager;
-    private readonly SignInManager<IdentityUser> _signInManager;
+    private readonly UserManager<AppUser> _userManager;
+    private readonly SignInManager<AppUser> _signInManager;
 
-    public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
+    public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
     {
         _userManager = userManager;
         _signInManager = signInManager;
@@ -19,6 +19,39 @@ public class AccountController : Controller
     public IActionResult Index()
     {
         return View();
+    }
+
+    [HttpGet]
+    public IActionResult Login(string? returnUrl = null)
+    {
+        LoginViewModel loginViewModel = new()
+        {
+            ReturnUrl = returnUrl ?? Url.Content("~/")
+        };
+        return View(loginViewModel);
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Login(LoginViewModel loginViewModel, string? returnUrl = null)
+    {
+        if (ModelState.IsValid)
+        {
+            var result = await _signInManager.PasswordSignInAsync(loginViewModel.UserName,
+                                                            loginViewModel.Password,
+                                                            loginViewModel.RememberMe,
+                                                            lockoutOnFailure: false);
+            if (result.Succeeded)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                ModelState.AddModelError(string.Empty, "Invalid login attempt");
+                return View(loginViewModel);
+            }
+        }
+        return View(loginViewModel);
     }
 
     public async Task<IActionResult> Register(string? returnUrl = null)
@@ -47,5 +80,13 @@ public class AccountController : Controller
         }
 
         return View(registerViewModel);
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> LogOff()
+    {
+        await _signInManager.SignOutAsync();
+        return RedirectToAction("Index", "Home");
     }
 }
