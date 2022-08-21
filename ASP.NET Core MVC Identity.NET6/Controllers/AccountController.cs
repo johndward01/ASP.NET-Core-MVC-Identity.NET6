@@ -1,4 +1,5 @@
-﻿using ASP.NET_Core_MVC_Identity.NET6.Models;
+﻿using ASP.NET_Core_MVC_Identity.NET6.Interfaces;
+using ASP.NET_Core_MVC_Identity.NET6.Models;
 using ASP.NET_Core_MVC_Identity.NET6.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -9,11 +10,15 @@ public class AccountController : Controller
 {
     private readonly UserManager<AppUser> _userManager;
     private readonly SignInManager<AppUser> _signInManager;
+    private readonly ISendGridEmail _sendGridEmail;
 
-    public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
+    public AccountController(UserManager<AppUser> userManager,
+        SignInManager<AppUser> signInManager,
+        ISendGridEmail sendGridEmail)
     {
         _userManager = userManager;
         _signInManager = signInManager;
+        _sendGridEmail = sendGridEmail;
     }
 
     public IActionResult Index()
@@ -31,6 +36,32 @@ public class AccountController : Controller
         return View(loginViewModel);
     }
 
+    [HttpGet]
+    public IActionResult ForgotPassword()
+    {
+        return View();
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> ForgotPassword(ForgotPasswordViewModel model)
+    {
+        if (ModelState.IsValid)
+        {
+            var user = await _userManager.FindByEmailAsync(model.Email);
+            if (user == null)
+            {
+                return RedirectToAction("ForgotPasswordConfirmation");
+            }
+            var code = await _userManager.GeneratePasswordResetTokenAsync(user);
+            var callbackurl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
+
+            await _sendGridEmail.SendEmailAsync(model.Email, "Reset Email Confirmation", "Please reset email by going to this " +
+                "<a href=\"" + callbackurl + "\">link</a>");
+            return RedirectToAction("ForgotPasswordConfirmation");
+        }
+        return View(model);
+    }
+
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Login(LoginViewModel loginViewModel, string? returnUrl = null)
@@ -40,10 +71,14 @@ public class AccountController : Controller
             var result = await _signInManager.PasswordSignInAsync(loginViewModel.UserName,
                                                             loginViewModel.Password,
                                                             loginViewModel.RememberMe,
-                                                            lockoutOnFailure: false);
+                                                            lockoutOnFailure: true);
             if (result.Succeeded)
             {
                 return RedirectToAction("Index", "Home");
+            }
+            if (result.IsLockedOut)
+            {
+                return View("Lockout");
             }
             else
             {
@@ -80,6 +115,12 @@ public class AccountController : Controller
         }
 
         return View(registerViewModel);
+    }
+
+    [HttpGet]
+    public IActionResult ForgotPasswordConfirmation()
+    {
+        return View();
     }
 
     [HttpPost]
