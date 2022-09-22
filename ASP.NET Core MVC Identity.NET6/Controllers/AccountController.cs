@@ -1,8 +1,10 @@
 ﻿using ASP.NET_Core_MVC_Identity.NET6.Interfaces;
 using ASP.NET_Core_MVC_Identity.NET6.Models;
 using ASP.NET_Core_MVC_Identity.NET6.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace ASP.NET_Core_MVC_Identity.NET6.Controllers;
 
@@ -10,14 +12,17 @@ public class AccountController : Controller
 {
     private readonly UserManager<AppUser> _userManager;
     private readonly SignInManager<AppUser> _signInManager;
+    private readonly RoleManager<IdentityRole> _roleManager;
     private readonly ISendGridEmail _sendGridEmail;
 
     public AccountController(UserManager<AppUser> userManager,
         SignInManager<AppUser> signInManager,
+        RoleManager<IdentityRole> roleManager,
         ISendGridEmail sendGridEmail)
     {
         _userManager = userManager;
         _signInManager = signInManager;
+        _roleManager = roleManager;
         _sendGridEmail = sendGridEmail;
     }
 
@@ -116,10 +121,33 @@ public class AccountController : Controller
         return View(loginViewModel);
     }
 
+    [HttpGet]
     public async Task<IActionResult> Register(string? returnUrl = null)
     {
-        RegisterViewModel registerViewModel = new();
-        registerViewModel.ReturnUrl = returnUrl;
+        if(!await _roleManager.RoleExistsAsync("Admin"))
+        {
+            await _roleManager.CreateAsync(new IdentityRole("Admin"));
+            await _roleManager.CreateAsync(new IdentityRole("Standard"));
+        }
+
+        var listItems = new List<SelectListItem>();
+        listItems.Add(new SelectListItem()
+        {
+            Value = "Admin",
+            Text = "Admin"
+        });
+
+        listItems.Add(new SelectListItem()
+        {
+            Value = "Standard",
+            Text = "Standard"
+        });
+
+        RegisterViewModel registerViewModel = new()
+        {
+            ReturnUrl = returnUrl,
+            RoleList = listItems
+        };
         return View(registerViewModel);
     }
 
@@ -135,6 +163,14 @@ public class AccountController : Controller
             var result = await _userManager.CreateAsync(user, registerViewModel.Password);
             if (result.Succeeded)
             {
+                if (registerViewModel.RoleSelected != null && registerViewModel.RoleSelected.Length > 0 && registerViewModel.RoleSelected == "Admin")
+                {
+                    await _userManager.AddToRoleAsync(user, "Admin");
+                }
+                else
+                {
+                    await _userManager.AddToRoleAsync(user, "Standard");
+                }
                 await _signInManager.SignInAsync(user, isPersistent: false);
                 return LocalRedirect(returnUrl);
             }
