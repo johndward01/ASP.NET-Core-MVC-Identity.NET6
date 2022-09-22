@@ -10,12 +10,12 @@
 
 @if(User.Identity.IsAuthenticated)
 {
-    @if (!User.IsInRole("Admin"))
+    @if (User.IsInRole("admin"))
     {
-        <h3>Welcome Standard!</h3>
+        <h3>Welcome Admin!</h3>
     }
     else
     {
-        <h3>Welcome Admin!</h3>
+        <h3>Welcome Standard!</h3>
     }
 }

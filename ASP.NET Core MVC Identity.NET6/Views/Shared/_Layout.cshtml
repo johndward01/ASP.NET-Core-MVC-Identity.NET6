@@ -29,6 +29,9 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Index">Users</a>
+                        </li>
                         @if (SignInManager.IsSignedIn(User))
                         {
                             <li class="nav-item">
@@ -48,13 +51,7 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
-                            </li>
-                            <li class="nav-item">
-                                <form id="logoutForm" method="post" class="form-inline" asp-controller="Account"
-                                  asp-action="LogOff">
-                                    <button type="submit" class="btn nav-link">Logout</button>
-                                </form>
-                            </li>
+                            </li>                            
                         }
                     </ul>
                 </div>
