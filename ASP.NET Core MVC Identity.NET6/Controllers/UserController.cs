@@ -9,7 +9,6 @@ using System.Security.Claims;
 
 namespace ASP.NET_Core_MVC_Identity.NET6.Controllers;
 
-[Authorize]
 public class UserController : Controller
 {
     private readonly ApplicationDbContext _db;
@@ -21,7 +20,6 @@ public class UserController : Controller
         _userManager = userManager;
     }
 
-    [Authorize]
     public IActionResult Index()
     {
         var userList = _db.AppUser.ToList();
@@ -43,7 +41,6 @@ public class UserController : Controller
         return View(userList);
     }
 
-    [Authorize]
     public IActionResult Edit(string userId)
     {
         var user = _db.AppUser.FirstOrDefault(u => u.Id == userId);
@@ -66,7 +63,6 @@ public class UserController : Controller
         return View(user);
     }
 
-    [Authorize]
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Edit(AppUser user)
@@ -98,7 +94,6 @@ public class UserController : Controller
         return View(user);
     }
 
-    [Authorize]
     [HttpPost]
     public IActionResult Delete(string userId)
     {
