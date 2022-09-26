@@ -31,15 +31,6 @@ public class AccountController : Controller
         return View();
     }
 
-    [HttpGet]
-    public IActionResult Login(string? returnUrl = null)
-    {
-        LoginViewModel loginViewModel = new()
-        {
-            ReturnUrl = returnUrl ?? Url.Content("~/")
-        };
-        return View(loginViewModel);
-    }
 
     [HttpGet]
     public IActionResult ForgotPassword()
@@ -94,6 +85,16 @@ public class AccountController : Controller
         return View(resetPasswordViewModel);
     }
 
+    [HttpGet]
+    public IActionResult Login(string? returnUrl = null)
+    {
+        LoginViewModel loginViewModel = new()
+        {
+            ReturnUrl = returnUrl ?? Url.Content("~/")
+        };
+        return View(loginViewModel);
+    }
+
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Login(LoginViewModel loginViewModel, string? returnUrl = null)
@@ -110,7 +111,7 @@ public class AccountController : Controller
             }
             if (result.IsLockedOut)
             {
-                return View("Lockout");
+                return RedirectToAction("Index", "Home");
             }
             else
             {
@@ -190,5 +191,10 @@ public class AccountController : Controller
     {
         await _signInManager.SignOutAsync();
         return RedirectToAction("Index", "Home");
+    }
+
+    public IActionResult AccessDenied()
+    {
+        return RedirectToAction("Error", "Home");
     }
 }
