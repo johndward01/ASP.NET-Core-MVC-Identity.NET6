@@ -124,7 +124,7 @@ public class AccountController : Controller
     [HttpGet]
     public async Task<IActionResult> Register(string? returnUrl = null)
     {
-        if(!await _roleManager.RoleExistsAsync("Admin"))
+        if (!await _roleManager.RoleExistsAsync("Admin"))
         {
             await _roleManager.CreateAsync(new IdentityRole("Admin"));
             await _roleManager.CreateAsync(new IdentityRole("Standard"));
@@ -145,8 +145,7 @@ public class AccountController : Controller
 
         RegisterViewModel registerViewModel = new()
         {
-            ReturnUrl = returnUrl,
-            RoleList = listItems
+            ReturnUrl = returnUrl
         };
         return View(registerViewModel);
     }
@@ -163,14 +162,7 @@ public class AccountController : Controller
             var result = await _userManager.CreateAsync(user, registerViewModel.Password);
             if (result.Succeeded)
             {
-                if (registerViewModel.RoleSelected != null && registerViewModel.RoleSelected.Length > 0 && registerViewModel.RoleSelected == "Admin")
-                {
-                    await _userManager.AddToRoleAsync(user, "Admin");
-                }
-                else
-                {
-                    await _userManager.AddToRoleAsync(user, "Standard");
-                }
+                await _userManager.AddToRoleAsync(user, "Standard");
                 await _signInManager.SignInAsync(user, isPersistent: false);
                 return LocalRedirect(returnUrl);
             }

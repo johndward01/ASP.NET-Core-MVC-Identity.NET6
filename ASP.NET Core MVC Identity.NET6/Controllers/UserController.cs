@@ -1,10 +1,15 @@
 ﻿using ASP.NET_Core_MVC_Identity.NET6.Data;
 using ASP.NET_Core_MVC_Identity.NET6.Models;
+using ASP.NET_Core_MVC_Identity.NET6.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Security.Claims;
 
 namespace ASP.NET_Core_MVC_Identity.NET6.Controllers;
+
+[Authorize]
 public class UserController : Controller
 {
     private readonly ApplicationDbContext _db;
@@ -16,6 +21,7 @@ public class UserController : Controller
         _userManager = userManager;
     }
 
+    [Authorize]
     public IActionResult Index()
     {
         var userList = _db.AppUser.ToList();
@@ -37,6 +43,7 @@ public class UserController : Controller
         return View(userList);
     }
 
+    [Authorize]
     public IActionResult Edit(string userId)
     {
         var user = _db.AppUser.FirstOrDefault(u => u.Id == userId);
@@ -59,6 +66,7 @@ public class UserController : Controller
         return View(user);
     }
 
+    [Authorize]
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Edit(AppUser user)
@@ -88,9 +96,9 @@ public class UserController : Controller
         });
 
         return View(user);
-
     }
 
+    [Authorize]
     [HttpPost]
     public IActionResult Delete(string userId)
     {
@@ -104,6 +112,68 @@ public class UserController : Controller
         return RedirectToAction(nameof(Index));
     }
 
+    [HttpGet]
+    public async Task<IActionResult> ManageClaims(string userId)
+    {
+        AppUser user = await _userManager.FindByIdAsync(userId);
 
+        if (user == null)
+        {
+            return NotFound();
+        }
+
+        IList<Claim> existingUserClaims = await _userManager.GetClaimsAsync(user);
+
+        UserClaimsViewModel model = new()
+        {
+            UserId = userId
+        };
+
+        foreach (Claim claim in ClaimStore.claimsList)
+        {
+            UserClaim userClaim = new()
+            {
+                ClaimType = claim.Type
+            };
+            if (existingUserClaims.Any(c => c.Type == claim.Type))
+            {
+                userClaim.IsSelected = true;
+            }
+            model.Claims.Add(userClaim);
+        }
+
+        return View(model);
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> ManageClaims(UserClaimsViewModel userClaimsViewModel)
+    {
+        var user = await _userManager.FindByIdAsync(userClaimsViewModel.UserId);
+
+        if (user == null)
+        {
+            return NotFound();
+        }
+
+        var claims = await _userManager.GetClaimsAsync(user);
+        var result = await _userManager.RemoveClaimsAsync(user, claims);
+
+        if (!result.Succeeded)
+        {
+            return View(userClaimsViewModel);
+        }
+
+        result = await _userManager.AddClaimsAsync(user,
+            userClaimsViewModel.Claims.Where(c => c.IsSelected).Select(c => new Claim(c.ClaimType, c.IsSelected.ToString()))
+            );
+
+        if (!result.Succeeded)
+        {
+            return View(userClaimsViewModel);
+        }
+
+        return RedirectToAction(nameof(Index));
+    }
 
 }

@@ -42,8 +42,8 @@ public class SendGridEmail : ISendGridEmail
         // See https://sendgrid.com/docs/User_Guide/Settings/tracking.html
         msg.SetClickTracking(false, false);
         var response = await client.SendEmailAsync(msg);
-        var dummy = response.StatusCode;
-        var dummy2 = response.Headers;
+        //var dummy = response.StatusCode;
+        //var dummy2 = response.Headers;
         _logger.LogInformation(response.IsSuccessStatusCode
                                ? $"Email to {toEmail} queued successfully!"
                                : $"Failure Email to {toEmail}");
