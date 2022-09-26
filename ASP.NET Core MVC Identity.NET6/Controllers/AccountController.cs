@@ -1,7 +1,6 @@
 ﻿using ASP.NET_Core_MVC_Identity.NET6.Interfaces;
 using ASP.NET_Core_MVC_Identity.NET6.Models;
 using ASP.NET_Core_MVC_Identity.NET6.ViewModels;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;

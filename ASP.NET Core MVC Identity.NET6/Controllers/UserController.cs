@@ -20,6 +20,7 @@ public class UserController : Controller
         _userManager = userManager;
     }
 
+    [Authorize(Roles = "admin")]
     public IActionResult Index()
     {
         var userList = _db.AppUser.ToList();
@@ -41,6 +42,7 @@ public class UserController : Controller
         return View(userList);
     }
 
+    [Authorize(Roles = "admin")]
     public IActionResult Edit(string userId)
     {
         var user = _db.AppUser.FirstOrDefault(u => u.Id == userId);
@@ -63,6 +65,7 @@ public class UserController : Controller
         return View(user);
     }
 
+    [Authorize(Roles = "admin")]
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Edit(AppUser user)
@@ -94,6 +97,7 @@ public class UserController : Controller
         return View(user);
     }
 
+    [Authorize(Roles = "admin")]
     [HttpPost]
     public IActionResult Delete(string userId)
     {
@@ -107,6 +111,7 @@ public class UserController : Controller
         return RedirectToAction(nameof(Index));
     }
 
+    [Authorize(Roles = "admin")]
     [HttpGet]
     public async Task<IActionResult> ManageClaims(string userId)
     {
@@ -140,6 +145,7 @@ public class UserController : Controller
         return View(model);
     }
 
+    [Authorize(Roles = "admin")]
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> ManageClaims(UserClaimsViewModel userClaimsViewModel)

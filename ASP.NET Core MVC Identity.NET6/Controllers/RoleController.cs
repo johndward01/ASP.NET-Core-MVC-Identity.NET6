@@ -1,11 +1,8 @@
 ﻿using ASP.NET_Core_MVC_Identity.NET6.Data;
 using ASP.NET_Core_MVC_Identity.NET6.Models;
-using ASP.NET_Core_MVC_Identity.NET6.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
-using System.Security.Permissions;
 
 namespace ASP.NET_Core_MVC_Identity.NET6.Controllers;
 
@@ -22,6 +19,7 @@ public class RoleController : Controller
         _roleManager = roleManager;
     }
 
+    [Authorize(Roles = "admin")]
     public IActionResult Index()
     {
         var roles = _db.Roles.ToList();
@@ -29,8 +27,8 @@ public class RoleController : Controller
     }
 
 
-    [HttpGet]
     [Authorize(Roles = "admin")]
+    [HttpGet]
     public IActionResult Upsert(string id)
     {
         if (string.IsNullOrEmpty(id))
@@ -44,9 +42,9 @@ public class RoleController : Controller
         }
     }
 
+    [Authorize(Roles = "admin")]
     [HttpPost]
     [ValidateAntiForgeryToken]
-    [Authorize(Roles = "admin")]
     public async Task<IActionResult> Upsert(IdentityRole role)
     {
         if (await _roleManager.RoleExistsAsync(role.Name))
@@ -71,9 +69,9 @@ public class RoleController : Controller
         return RedirectToAction(nameof(Index));
     }
 
+    [Authorize(Roles = "admin")]
     [HttpPost]
     [ValidateAntiForgeryToken]
-    [Authorize(Roles = "admin")]
     public async Task<IActionResult> Delete(string id)
     {
         var roleDb = _db.Roles.FirstOrDefault(u => u.Id == id);

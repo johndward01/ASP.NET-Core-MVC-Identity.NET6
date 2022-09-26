@@ -31,14 +31,17 @@
                         </li>
                         @if (SignInManager.IsSignedIn(User))
                         {
+                            @if (User.IsInRole("admin"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Index">Users</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-controller="Role" asp-action="Index">Roles</a>
+                                </li>
+                            }
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Index">Users</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-controller="Role" asp-action="Index">Roles</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Hello @UserManager.GetUserName(User)</a>
+                                <a class="nav-link" href="#">Hey, @UserManager.GetUserName(User)</a>
                             </li>
                             <li class="nav-item">
                                 <form id="logoutForm" method="post" class="form-inline" asp-controller="Account"
