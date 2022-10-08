@@ -4,3 +4,5 @@
 
 - Fork and clone this to your local machine
 - Run the application
+
+> Note: This is just a template!
