@@ -1,0 +1,103 @@
+﻿@using ASP.NET_Core_Identity_Demo.Models.Weather
+@model Root
+
+<style>
+    /* width */
+    ::-webkit-scrollbar {
+        width: 15px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+        background: #ccc;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: #777;
+    }
+
+        /* Handle on hover */
+        ::-webkit-scrollbar-thumb:hover {
+            background: #333;
+        }
+</style>
+
+@{
+    var listItemCounter = 0;
+}
+
+<div class="container mucho-margin-top text-white-50">
+    <div class="display-2">
+        <p class="m-5 p-5 border border-light">The Root Weather Object's Properties and Values</p>
+    </div>
+    <h1>API_Key: @Model.API_Key</h1>
+    <h1>City: @Model.City.Name </h1>
+    <h1>Cnt: @Model.Cnt</h1>
+    <h1>Cod: @Model.Cod</h1>
+    <h1>Message: @Model.Message Timezone</h1>
+</div>
+
+<br />
+<hr />
+<br />
+
+
+<div class="container mucho-margin-top text-white-50">
+    <div class="display-2">
+        <p class="m-5 p-5 border border-light">The Root Weather Object's City Property Values</p>
+    </div>
+    <h1>ID: @Model.City.Id</h1>
+    <h1>City: @Model.City.Name</h1>
+    <h1>Country: @Model.City.Country</h1>
+    <h1>Population: @Model.City.Population</h1>
+    <h1>Timezone: @Model.City.Timezone</h1>
+    <h1>Sunrise: @Model.City.Sunrise</h1>
+    <h1>Sunset: @Model.City.Sunset</h1>
+</div>
+
+<br />
+<hr />
+<br />
+<div class="container text-white-50">
+    <div class="display-2">
+        <p class="m-5 p-5 border border-light">The Root Weather Object's List of type ListItem Property Values</p>
+    </div>
+    <ul>
+        @foreach (var item in @Model.List)
+        {
+            listItemCounter++;
+
+            <h1 class="text-primary">List Item @listItemCounter</h1>
+
+            <li class="h3 border border-secondary m-2 p-3">Clouds (Cloudiness percentage):   @item.Clouds.All</li>
+            <li class="h3 border border-secondary m-2 p-3">Dt (Time of data calculation, unix, UTC):   @item.Dt</li>
+            <li class="h3 border border-secondary m-2 p-3">Dt_txt (Time of data forecasted, ISO, UTC):   @item.Dt_txt</li>
+            <li class="h3 border border-secondary m-2 p-3">Temp: @item.Main.Temp</li>
+            <li class="h3 border border-secondary m-2 p-3">Feels_like (Temperature. This temperature parameter accounts for the human perception of weather. ):  @item.Main.Feels_like</li>
+            <li class="h3 border border-secondary m-2 p-3">Temp_min (Minimum temperature at the moment. This is minimal currently observed temperature (within large megalopolises and urban areas). ):  @item.Main.Temp_min</li>
+            <li class="h3 border border-secondary m-2 p-3">Temp_max (Maximum temperature at the moment. This is maximal currently observed temperature (within large megalopolises and urban areas). ):   @item.Main.Temp_max</li>
+            <li class="h3 border border-secondary m-2 p-3">Pressure ( Atmospheric pressure (on the sea level, if there is no sea_level or grnd_level data), hPa):  @item.Main.Pressure</li>
+            <li class="h3 border border-secondary m-2 p-3">Sea_level (Atmospheric pressure on the sea level, hPa):   @item.Main.Sea_level</li>
+            <li class="h3 border border-secondary m-2 p-3">Grnd_level (Atmospheric pressure on the ground level, hPa):   @item.Main.Grnd_level</li>
+            <li class="h3 border border-secondary m-2 p-3">Humidity (Humidity percentage):   @item.Main.Humidity</li>
+            <li class="h3 border border-secondary m-2 p-3">Temp_kf (OpenWeatherMapAPI Internal parameter):  @item.Main.Temp_kf</li>
+            <li class="h3 border border-secondary m-2 p-3">Pop (Probability of precipitation):   @item.Pop</li>
+            <li class="h3 border border-secondary m-2 p-3">Sys.Pod (Part of the day (n - night, d - day)):   @item.Sys.Pod</li>
+            <li class="h3 border border-secondary m-2 p-3">Visibility (Average visibility in metres):   @item.Visibility</li>
+
+            foreach (var weatherItem in @item.Weather)
+            {
+                <div class="m-2 p-3 border border-secondary">
+                    <h3 class="text-info">Weather List Item @listItemCounter</h3>
+                    <div class=""><span style="font-size: 1.2rem;">Weather condition ID:</span> @weatherItem.Id</div>
+                    <div class=""><span style="font-size: 1.2rem;">Main (Group of weather parameters (Rain, Snow, Extreme etc...)):</span> @weatherItem.Main</div>
+                    <div class=""><span style="font-size: 1.2rem;">Description:</span> @weatherItem.Description (Weather condition within the group. You can get the output in your language. <a href="https://openweathermap.org/current#multi">Learn more</a>)</div>
+                    <div class=""><span style="font-size: 1.2rem;">Weather Icon ID:</span> @weatherItem.Icon</div>
+                </div>
+
+            }
+            <hr />
+        }
+    </ul>
+</div>

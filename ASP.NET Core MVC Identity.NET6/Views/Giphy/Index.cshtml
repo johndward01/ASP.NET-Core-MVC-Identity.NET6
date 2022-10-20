@@ -1,0 +1,36 @@
+﻿@using ASP.NET_Core_Identity_Demo.GiphyAPI
+
+@model GiphyAPI_Root
+
+<style>
+    .grid-container {
+        display: inline-grid;
+        grid-template-columns: auto auto;
+        background-color: #2196F3;        
+    }
+
+    .grid-item {
+        background-color: rgba(255, 255, 255, 0.8);
+        border: 1px solid rgba(0, 0, 0, 0.8);
+        text-align: center;
+        margin: 10px;
+    }
+
+
+
+</style>
+
+<div class="mucho-margin-top">
+        <h1 class="display-4 center">Giphy API Demo: Cat memes</h1>
+        <div class="grid-container">
+            @foreach (var item in Model.data)
+            {
+                <div class="grid-item">
+                    <img src="@item.Images.fixed_height.url" />
+                </div>
+            }
+        </div>
+
+    <br />
+</div>
+
