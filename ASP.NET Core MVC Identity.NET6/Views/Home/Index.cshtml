@@ -35,11 +35,12 @@
     <title>3D Scene</title>
     <style>
         body {
-            margin: 0px;
+            margin: 10px;
         }
     </style>
 </head>
 <body>
+
     <script src="~/Three_js/three.min.js"></script>
     <script>
         const scene = new THREE.Scene();
@@ -53,7 +54,7 @@
         //TODO pointer lock => research
 
         const renderer = new THREE.WebGLRenderer();
-        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setSize(window.innerWidth - 50, window.innerHeight - 125);
         document.body.appendChild(renderer.domElement);
 
         const geometry = new THREE.BoxGeometry(1, 1, 1);
@@ -72,7 +73,11 @@
             renderer.render(scene, camera);
         }
 
-        animate();
+        cube.rotation.x += 0.50;
+        cube.rotation.y -= 0.25;
+
+        renderer.render(scene, camera)
+        //animate();
     </script>
 </body>
 </html>
