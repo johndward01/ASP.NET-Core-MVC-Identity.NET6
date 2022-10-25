@@ -32,6 +32,9 @@
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" title="Giphy API Demo" asp-controller="Giphy" asp-action="Index"><img src="~/imgs/gif-16.png" /> Giphy API Demo</a>
                         </li>
+                        <li>
+                            <a class="nav-link" asp-area="" asp-controller="OpenWeatherMap" asp-action="Index"><i class="fas fa-cloud-sun-rain"></i> Weather API</a>
+                        </li>
                         @if (SignInManager.IsSignedIn(User))
                         {
                             @if (User.IsInRole("admin"))

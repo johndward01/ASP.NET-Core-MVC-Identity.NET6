@@ -21,6 +21,7 @@ namespace ASP.NET_Core_Identity_Demo.Controllers
                            $"q={rootWeather.City.Name}" +
                            $"&appid={rootWeather.API_Key}" +
                            $"&units=imperial";
+
             var jsonResponse = client.GetStringAsync(url).Result;
             rootWeather = JsonConvert.DeserializeObject<Root>(jsonResponse);
 
