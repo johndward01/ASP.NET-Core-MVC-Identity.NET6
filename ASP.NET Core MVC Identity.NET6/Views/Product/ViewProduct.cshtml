@@ -1,0 +1,45 @@
+﻿@using ASP.NET_Core_Identity_Demo.Models
+@model Product
+
+<div class="container mucho-margin-top">
+
+    <div>
+        <br />
+        <br />
+        <h3>@Model.Name Information</h3>
+    </div>
+
+    <table class="table">
+        <tr>
+            <th>Product ID</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Category ID</th>
+            <th>On Sale</th>
+            <th>StockLevel</th>
+        </tr>
+        <tr>
+            <td>@Model.ProductID</td>
+            <td>@Model.Name</td>
+            <td>@Model.Price</td>
+            <td>@Model.CategoryID</td>
+            <td>@Model.OnSale</td>
+            <td>@Model.StockLevel</td>
+        </tr>
+
+    </table>
+
+    <div style="display: block">
+        <a href="/Product/UpdateProduct/@Model.ProductID">Update this Product</a>
+    </div>
+    <br />
+    <div style="display: block">
+        @using (Html.BeginForm("DeleteProduct", "Product", "Post"))
+        {
+            <input type="hidden" asp-for="ProductID" value="@Model.ProductID" />
+            <input type="submit" onclick="return confirm('Are you sure?')" value="Delete this product" />
+        }
+    </div>
+
+
+</div>

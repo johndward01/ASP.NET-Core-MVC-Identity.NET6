@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Http;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace ASP.NET_Core_Identity_Demo.Controllers
 {
@@ -23,6 +24,10 @@ namespace ASP.NET_Core_Identity_Demo.Controllers
                            $"&units=imperial";
 
             var jsonResponse = client.GetStringAsync(url).Result;
+            
+            var jObj = JObject.Parse(jsonResponse);
+            
+
             rootWeather = JsonConvert.DeserializeObject<Root>(jsonResponse);
 
             return View(rootWeather);

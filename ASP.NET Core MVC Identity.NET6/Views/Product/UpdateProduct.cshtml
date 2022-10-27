@@ -1,0 +1,31 @@
+﻿@using ASP.NET_Core_Identity_Demo.Models
+@model Product
+
+<div class="container mucho-margin-top">
+
+    <div>
+        <br />
+        <br />
+        <h2>Update @Model.Name</h2>
+    </div>
+    <div>
+        @using (Html.BeginForm("UpdateProductToDatabase", "Product", "Post"))
+        {
+            <input asp-for="ProductID" type="hidden" value="@Model.ProductID" />
+
+            <label asp-for="Name" class="control-label">Name</label>
+            <input type="text" name="Name" class="form-control" value="@Model.Name" />
+
+            <br />
+
+            <label asp-for="Price" class="control-label">Price</label>
+            <input type="number" step="0.01" name="Price" class="form-control" value="@Model.Price" />
+
+            <br />
+
+            <input type="submit" value="Update Product" class="btn btn-primary" />
+        }
+    </div>
+
+</div>
+

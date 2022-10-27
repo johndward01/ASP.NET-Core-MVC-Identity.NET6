@@ -1,3 +1,4 @@
+using ASP.NET_Core_Identity_Demo;
 using ASP.NET_Core_MVC_Identity.NET6.Data;
 using ASP.NET_Core_MVC_Identity.NET6.Helpers;
 using ASP.NET_Core_MVC_Identity.NET6.Interfaces;
@@ -5,6 +6,9 @@ using ASP.NET_Core_MVC_Identity.NET6.Models;
 using ASP.NET_Core_MVC_Identity.NET6.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using MySql.Data.MySqlClient;
+using System.Configuration;
+using System.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,7 +19,14 @@ builder.Services.AddDbContext<ApplicationDbContext>(e =>
 builder.Services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
 builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<ISendGridEmail, SendGridEmail>();
+builder.Services.AddTransient<IProductRepository, ProductRepository>();
 builder.Services.Configure<AuthMessageSenderOptions>(builder.Configuration.GetSection("SendGrid"));
+builder.Services.AddScoped<IDbConnection>((s) =>
+{
+    IDbConnection conn = new MySqlConnection(builder.Configuration.GetConnectionString("bestbuy"));
+    conn.Open();
+    return conn;
+});
 builder.Services.Configure<IdentityOptions>(opt =>
 {
     opt.Password.RequiredLength = 5;

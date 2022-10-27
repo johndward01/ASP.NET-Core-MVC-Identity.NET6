@@ -1,0 +1,48 @@
+﻿@using ASP.NET_Core_Identity_Demo.Models
+@model IEnumerable<Product>
+
+<div class="container text-white-50 mucho-margin-top">
+    <div class="flex-row">
+        <h1 class="display-3 text-white">Products</h1>
+
+        <form asp-action="Index" method="get">
+            <div class="form-actions no-color">
+                <p>
+                    Find by name: <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
+                    <input type="submit" value="Search" class="btn btn-outline-primary mx-2" />
+                    <a asp-action="Index">Back to Full List</a>
+                </p>
+            </div>
+        </form>
+
+        <div>
+            <a href="/Product/InsertProduct/">Create a New Product</a>
+        </div>
+    </div>  
+
+
+    <br />
+    <table class="table table-striped table-dark table-hover">
+        <tr>
+            <th><a asp-action="Index" asp-route-sortOrder="@ViewData["IDSortParam"]">@Html.DisplayNameFor(product => product.ProductID)</a></th>
+            <th><a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParam"]">@Html.DisplayNameFor(product => product.Name)</a></th>
+            <th><a asp-action="Index" asp-route-sortOrder="@ViewData["PriceSortParam"]">@Html.DisplayNameFor(product => product.Price)</a></th>
+            <th><a asp-action="Index" asp-route-sortOrder="@ViewData["CategorySortParam"]">@Html.DisplayNameFor(product => product.CategoryID)</a></th>
+            <th><a asp-action="Index" asp-route-sortOrder="@ViewData["OnSaleSortParam"]">@Html.DisplayNameFor(product => product.OnSale)</a></th>
+            <th><a asp-action="Index" asp-route-sortOrder="@ViewData["StockLevelSortParam"]">@Html.DisplayNameFor(product => product.StockLevel)</a></th>
+        </tr>
+
+        @foreach (var product in Model)
+        {
+            <tr>
+                <td><a href=/Product/ViewProduct/@product.ProductID>@product.ProductID</a></td>
+                <td>@product.Name</td>
+                <td>@product.Price</td>
+                <td>@product.CategoryID</td>
+                <td>@product.OnSale</td>
+                <td>@product.StockLevel</td>
+            </tr>
+
+        }
+    </table>
+</div>

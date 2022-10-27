@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/ASP.NET_Core_MVC_Identity.NET6.styles.css" asp-append-version="true" />
+    <script src="https://kit.fontawesome.com/7160ed62e4.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <header>
@@ -29,8 +30,11 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
+                        <li class="nav-item m-2">
+                            <a class="nav-link" asp-area="" asp-controller="Product" asp-action="Index"><i class="fas fa-shopping-bag"></i> Products</a>
+                        </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="" title="Giphy API Demo" asp-controller="Giphy" asp-action="Index"><img src="~/imgs/gif-16.png" /> Giphy API Demo</a>
+                            <a class="nav-link" asp-area="" title="Giphy API Demo" asp-controller="Giphy" asp-action="Index"><i class="fa-solid fa-image"></i> Giphy API Demo</a>
                         </li>
                         <li>
                             <a class="nav-link" asp-area="" asp-controller="OpenWeatherMap" asp-action="Index"><i class="fas fa-cloud-sun-rain"></i> Weather API</a>
