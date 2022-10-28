@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="~/ASP.NET_Core_MVC_Identity.NET6.styles.css" asp-append-version="true" />
     <script src="https://kit.fontawesome.com/7160ed62e4.js" crossorigin="anonymous"></script>
 </head>
-<body>
+<body class="container-fluid">
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm box-shadow ">
             <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">ASP.NET_Core_MVC_Identity.NET6</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -25,12 +25,12 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
-                        <li class="nav-item m-2">
+                        <li class="nav-item dropdown">
                             <a class="nav-link" asp-area="" asp-controller="Product" asp-action="Index"><i class="fas fa-shopping-bag"></i> Products</a>
                         </li>
                         <li class="nav-item">
@@ -54,8 +54,7 @@
                                 <a class="nav-link" href="#">Hey, @UserManager.GetUserName(User)</a>
                             </li>
                             <li class="nav-item">
-                                <form id="logoutForm" method="post" class="form-inline" asp-controller="Account"
-                                  asp-action="LogOff">
+                                <form id="logoutForm" method="post" class="form-inline" asp-controller="Account" asp-action="LogOff">
                                     <button type="submit" class="btn nav-link">Logout</button>
                                 </form>
                             </li>
@@ -75,16 +74,9 @@
         </nav>
     </header>
     <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+        @RenderBody()
     </div>
 
-    <footer class="m-2 footer text-muted">
-        <div class="container">
-            &copy; 2022 - ASP.NET_Core_MVC_Identity.NET6 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

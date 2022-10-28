@@ -28,56 +28,70 @@
 @*
     THREE.JS PLAYGROUND
 *@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <title>3D Scene</title>
-    <style>
-        body {
-            margin: 10px;
-        }
-    </style>
-</head>
-<body>
+<style>
 
-    <script src="~/Three_js/three.min.js"></script>
-    <script>
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(
-            75,
-            window.innerWidth / window.innerHeight,
-            0.1,
-            1000
-        );
+    body {
+        margin-left: 10px;
+        font-size: large;
+    }
 
-        //TODO pointer lock => research
+    .title {
+        text-align: center;
+        margin: 15px;
+        color: white;
+    }
+</style>
 
-        const renderer = new THREE.WebGLRenderer();
-        renderer.setSize(window.innerWidth - 50, window.innerHeight - 125);
-        document.body.appendChild(renderer.domElement);
 
-        const geometry = new THREE.BoxGeometry(1, 1, 1);
-        const material = new THREE.MeshBasicMaterial({ color: 0x0000ff });
-        const cube = new THREE.Mesh(geometry, material);
-        scene.add(cube);
 
-        camera.position.z = 5;
+<div class="title">
+    <h1>Three.js Demo</h1>
+</div>
 
-        function animate() {
-            requestAnimationFrame(animate);
+<script src="~/Three_js/three.min.js"></script>
+<script>
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(
+        75,
+        window.innerWidth / window.innerHeight,
+        0.1,
+        1000
+    );
 
-            cube.rotation.x += 0.01;
-            cube.rotation.y += 0.01;
+    //TODO pointer lock => research
 
-            renderer.render(scene, camera);
-        }
+    const renderer = new THREE.WebGLRenderer();
+    renderer.setSize(window.innerWidth - 50, window.innerHeight - 125);
+    document.body.appendChild(renderer.domElement);
 
-        cube.rotation.x += 0.50;
-        cube.rotation.y -= 0.25;
+    const geometry = new THREE.BoxGeometry(1, 1, 1);
+    const material = new THREE.MeshBasicMaterial({ color: 0x0000ff });
+    const cube = new THREE.Mesh(geometry, material);
+    scene.add(cube);
 
-        renderer.render(scene, camera)
-        //animate();
-    </script>
-</body>
-</html>
+    camera.position.z = 5;
+
+    const size = 10;
+    const divisions = 10;
+
+    const gridHelper = new THREE.GridHelper(size, divisions);
+    scene.add(gridHelper);
+
+
+    function animate() {
+        requestAnimationFrame(animate);
+
+        cube.rotation.x += 0.01;
+        cube.rotation.y += 0.01;
+
+        renderer.render(scene, camera);
+    }
+
+    cube.rotation.x += 0.50;
+    cube.rotation.y -= 0.25;
+
+    renderer.render(scene, camera)
+    animate();
+</script>
+
+

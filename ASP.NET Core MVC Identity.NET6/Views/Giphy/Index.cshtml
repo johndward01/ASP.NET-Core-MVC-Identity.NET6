@@ -3,21 +3,13 @@
 @model GiphyAPI_Root
 
 <style>
-    .grid-container {
-        display: inline-grid;
-        grid-template-columns: auto auto;
-        background-color: #2196F3;        
-    }
-
-    .grid-item {
-        background-color: rgba(255, 255, 255, 0.8);
-        border: 1px solid rgba(0, 0, 0, 0.8);
-        text-align: center;
-        margin: 10px;
+    .main{
+        color: white;
+        max-width: 100%;
     }
 </style>
 
-<div class="mucho-margin-top">
+<div class="main">
         <h1 class="display-4 center">Giphy API Demo: Cat memes</h1>
         <div class="grid-container">
             @foreach (var item in Model.data)
