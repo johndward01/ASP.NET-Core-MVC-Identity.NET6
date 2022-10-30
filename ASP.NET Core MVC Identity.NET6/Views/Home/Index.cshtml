@@ -46,10 +46,12 @@
 
 <div class="title">
     <h1>Three.js Demo</h1>
+    <div onload="onLoad" id="body">Demo</div>
 </div>
 
 <script src="~/Three_js/three.min.js"></script>
 <script>
+
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(
         75,
@@ -62,7 +64,8 @@
 
     const renderer = new THREE.WebGLRenderer();
     renderer.setSize(window.innerWidth - 50, window.innerHeight - 125);
-    document.body.appendChild(renderer.domElement);
+    const demo = document.getElementById("body");
+    demo.appendChild(renderer.domElement);
 
     const geometry = new THREE.BoxGeometry(1, 1, 1);
     const material = new THREE.MeshBasicMaterial({ color: 0x0000ff });
@@ -80,7 +83,7 @@
     //gridHelper.rotation.y = Math.PI / 4;
     gridHelper.rotation.x = Math.PI / 8;
 
-    scene.add(gridHelper);
+    
 
 
     function animate() {
@@ -97,6 +100,9 @@
 
     renderer.render(scene, camera)
     animate();
+
+
+    scene.add(gridHelper);
 </script>
 
 
