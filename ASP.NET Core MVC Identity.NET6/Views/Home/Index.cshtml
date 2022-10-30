@@ -71,10 +71,15 @@
 
     camera.position.z = 5;
 
-    const size = 10;
-    const divisions = 10;
+    const size = 100;
+    const divisions = 50;
 
     const gridHelper = new THREE.GridHelper(size, divisions);
+
+    //gridHelper.rotation.z = Math.PI / 12;
+    //gridHelper.rotation.y = Math.PI / 4;
+    gridHelper.rotation.x = Math.PI / 8;
+
     scene.add(gridHelper);
 
 
