@@ -1,35 +1,5 @@
-﻿@*
-    DEFAULT TEMPLATE FOR ASP.NET CORE MVC
-*@
-@*@{
-    ViewData["Title"] = "Home Page";
-}
-
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
-
-
-@if(User.Identity.IsAuthenticated)
-{
-    @if (User.IsInRole("admin"))
-    {
-        <h3>Welcome Admin!</h3>
-    }
-    else
-    {
-        <h3>Welcome!</h3>
-    }
-}*@
-
-
-
-@*
-    THREE.JS PLAYGROUND
-*@
+﻿
 <style>
-
     body {
         margin-left: 10px;
         font-size: large;
@@ -37,7 +7,6 @@
 
     .title {
         text-align: center;
-        margin: 15px;
         color: white;
     }
 </style>
@@ -46,11 +15,85 @@
 
 <div class="title">
     <h1>Three.js Demo</h1>
-    <div onload="onLoad" id="body">Demo</div>
 </div>
 
 <script src="~/Three_js/three.min.js"></script>
 <script>
+    
+        //(function () {
+        //    // Scene
+        //    var scene = new THREE.Scene();
+        //    scene.background = new THREE.Color(0x2f2f2f);
+
+        //    var material_override = new THREE.MeshBasicMaterial({
+        //        color: new THREE.Color('lime'),
+        //        wireframe: true
+        //    });
+        //    scene.overrideMaterial = material_override;
+
+        //    // mesh1
+        //    var mesh = new THREE.Mesh(
+        //        new THREE.BoxGeometry(0.5, 0.5, 0.5),
+        //        new THREE.MeshDepthMaterial());
+        //    scene.add(mesh);
+
+        //    var mesh2 = new THREE.Mesh(
+        //        new THREE.BoxGeometry(0.5, 0.5, 0.5),
+        //        new THREE.MeshNormalMaterial());
+        //    mesh2.position.set(-1.5, 0, 0);
+        //    scene.add(mesh2);
+
+        //    // Camera
+        //    var camera = new THREE.PerspectiveCamera(45, 4 / 3, 0.75, 10);
+        //    camera.position.set(1.15, 0.85, 0.75);
+        //    camera.lookAt(0, 0, 0);
+        //    var light = new THREE.PointLight(0xffffff, 1);
+        //    light.position.set(1, 1, 0);
+        //    camera.add(light)
+        //    scene.add(camera);
+        //    // Render
+        //    var renderer = new THREE.WebGLRenderer();
+        //    renderer.setSize(640, 480);
+        //    document.getElementById('demo').appendChild(renderer.domElement);
+
+        //    var lt = new Date(),
+        //        time = 0,
+        //        switchTime = 1.0,
+        //        fps = 30;
+        //    var loop = function () {
+        //        var now = new Date(),
+        //            secs = (now - lt) / 1000;
+        //        requestAnimationFrame(loop);
+        //        if (secs > 1 / fps) {
+        //            time += secs;
+        //            if (time >= switchTime) {
+        //                if (scene.overrideMaterial) {
+        //                    scene.overrideMaterial = null;
+        //                } else {
+        //                    scene.overrideMaterial = material_override;
+        //                }
+        //                time %= switchTime;
+        //            }
+        //            renderer.render(scene, camera);
+        //            lt = now;
+        //        }
+        //    };
+
+        //    loop();
+
+        //}
+        //    ());
+    function animate() {
+        requestAnimationFrame(animate);
+
+        cube.rotation.x += 0.01;
+        cube.rotation.y += 0.01;
+
+        sphere.rotation.x += 0.01;
+        sphere.rotation.y += 0.01;
+
+        renderer.render(scene, camera);
+    }
 
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(
@@ -64,45 +107,38 @@
 
     const renderer = new THREE.WebGLRenderer();
     renderer.setSize(window.innerWidth - 50, window.innerHeight - 125);
-    const demo = document.getElementById("body");
-    demo.appendChild(renderer.domElement);
+    document.body.appendChild(renderer.domElement)
 
     const geometry = new THREE.BoxGeometry(1, 1, 1);
     const material = new THREE.MeshBasicMaterial({ color: 0x0000ff });
     const cube = new THREE.Mesh(geometry, material);
+    cube.position.x = -1;
     scene.add(cube);
 
+    const geo1 = new THREE.SphereGeometry(.5,10,10);
+    const mat1 = new THREE.MeshBasicMaterial({ color: 0xccc });
+    const sphere = new THREE.Mesh(geo1, mat1);
+    sphere.position.x = 1;
+    scene.add(sphere);
+
+
+    
     camera.position.z = 5;
 
     const size = 100;
     const divisions = 50;
-
     const gridHelper = new THREE.GridHelper(size, divisions);
-
     //gridHelper.rotation.z = Math.PI / 12;
     //gridHelper.rotation.y = Math.PI / 4;
     gridHelper.rotation.x = Math.PI / 8;
-
-    
-
-
-    function animate() {
-        requestAnimationFrame(animate);
-
-        cube.rotation.x += 0.01;
-        cube.rotation.y += 0.01;
-
-        renderer.render(scene, camera);
-    }
-
     cube.rotation.x += 0.50;
     cube.rotation.y -= 0.25;
+    scene.add(gridHelper);
 
     renderer.render(scene, camera)
     animate();
 
 
-    scene.add(gridHelper);
 </script>
 
 
