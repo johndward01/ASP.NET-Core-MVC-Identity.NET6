@@ -2,6 +2,7 @@ html {
     font-size: 14px;
     background-color: #181a1b;
     color: white;
+    scrollbar-color: rgb(128, 128, 128);
 }
 
 body {
