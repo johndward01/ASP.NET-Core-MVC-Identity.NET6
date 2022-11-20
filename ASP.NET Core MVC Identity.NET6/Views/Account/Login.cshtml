@@ -4,23 +4,21 @@
 @inject SignInManager<AppUser> signInManager
 
 
-<h1 class="text-info">Log in</h1>
+<h1>Log in</h1>
 <div class="row">
     <div class="col-md-8">
+        <div asp-validation-summary="All" class="text-danger"></div>
         <form asp-controller="Account" asp-action="Login" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" role="form">
-            <h4>Use a local account to log in.</h4>
-            <hr />
-            <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="UserName" class="col-md-2"></label>
                 <div class="col-md-10">
+                    <label asp-for="UserName" class="col-md-2"></label>
                     <input asp-for="UserName" class="form-control" />
                     <span asp-validation-for="UserName" class="text-danger"></span>
                 </div>
             </div>
             <div class="form-group">
-                <label asp-for="Password" class="col-md-2"></label>
                 <div class="col-md-10">
+                    <label asp-for="Password" class="col-md-2"></label>
                     <input asp-for="Password" class="form-control" />
                     <span asp-validation-for="Password" class="text-danger"></span>
                 </div>

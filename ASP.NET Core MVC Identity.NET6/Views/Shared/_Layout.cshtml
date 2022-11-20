@@ -15,57 +15,71 @@
 </head>
 <body class="container-fluid">
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm box-shadow ">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">ASP.NET_Core_MVC_Identity.NET6</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+                <a asp-controller="Homg" asp-action="Index"><img src="~/imgs/mvc-logo.png" /></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link" asp-area="" asp-controller="Product" asp-action="Index"><i class="fas fa-shopping-bag"></i> Products</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" title="Giphy API Demo" asp-controller="Giphy" asp-action="Index"><i class="fa-solid fa-image"></i> Giphy API Demo</a>
-                        </li>
-                        <li>
-                            <a class="nav-link" asp-area="" asp-controller="OpenWeatherMap" asp-action="Index"><i class="fas fa-cloud-sun-rain"></i> Weather API</a>
-                        </li>
                         @if (SignInManager.IsSignedIn(User))
                         {
+                            <li class="nav-item ms-3">
+                                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index"><i class="fa-solid fa-house"></i> Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy"><i class="fa-solid fa-key"></i> Privacy</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="Product" asp-action="Index"><i class="fas fa-shopping-bag"></i> Products</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" title="Giphy API Demo" asp-controller="Giphy" asp-action="Index"><i class="fa-solid fa-image"></i> Giphy</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="OpenWeatherMap" asp-action="Index"><i class="fas fa-cloud-sun-rain"></i> Weather</a>
+                            </li>
                             @if (User.IsInRole("admin"))
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Index">Users</a>
+                                    <a class="nav-link" asp-area="" asp-controller="User" asp-action="Index"><i class="fa-solid fa-users"></i> Users</a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-controller="Role" asp-action="Index">Roles</a>
+                                <li class="nav-item me-auto">
+                                    <a class="nav-link " asp-controller="Role" asp-action="Index"><i class="fa-solid fa-users-between-lines"></i> Roles</a>
                                 </li>
                             }
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Hey, @UserManager.GetUserName(User)</a>
+                                <a class="nav-link text-success" href="#"><i class="fa-solid fa-user"></i> &nbsp; @UserManager.GetUserName(User)</a>
                             </li>
                             <li class="nav-item">
                                 <form id="logoutForm" method="post" class="form-inline" asp-controller="Account" asp-action="LogOff">
-                                    <button type="submit" class="btn nav-link">Logout</button>
+                                    <button type="submit" class="btn btn-outline-danger">Logout</button>
                                 </form>
                             </li>
                         }
                         else
                         {
-                            <li class="nav-item">
-                                <a class="nav-link" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
+                            <li class="nav-item ms-3">
+                                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index"><i class="fa-solid fa-house"></i> Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
+                                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy"><i class="fa-solid fa-key"></i> Privacy</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="Product" asp-action="Index"><i class="fas fa-shopping-bag"></i> Products</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" title="Giphy API Demo" asp-controller="Giphy" asp-action="Index"><i class="fa-solid fa-image"></i> Giphy API</a>
+                            </li>
+                            <li class="nav-item me-auto">
+                                <a class="nav-link" asp-area="" asp-controller="OpenWeatherMap" asp-action="Index"><i class="fas fa-cloud-sun-rain"></i> Weather API</a>
+                            </li>
+                            <li>
+                                <a class="nav-link" asp-area="" asp-controller="Account" asp-action="Login"><i class="fa-solid fa-right-to-bracket"></i> Login</a>
+                            </li>
+                            <li>
+                                <a class="nav-link" asp-area="" asp-controller="Account" asp-action="Register"> <i class="fa-solid fa-user-plus"></i> Register</a>
                             </li>
                         }
                     </ul>
