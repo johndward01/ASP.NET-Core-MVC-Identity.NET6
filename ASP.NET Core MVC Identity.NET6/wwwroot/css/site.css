@@ -5,9 +5,24 @@ html, body {
     scrollbar-color: rgb(128, 128, 128);
 }
 
-.grid-container {
+.grid-container_2columns {
     display: inline-grid;
     grid-template-columns: auto auto;
+}
+
+.grid-container_3columns {
+    display: inline-grid;
+    grid-template-columns: auto auto auto;
+}
+
+.grid-container_4columns {
+    display: inline-grid;
+    grid-template-columns: auto auto auto auto;
+}
+
+.grid-container_5columns {
+    display: inline-grid;
+    grid-template-columns: auto auto auto auto auto;
 }
 
 .grid-item {

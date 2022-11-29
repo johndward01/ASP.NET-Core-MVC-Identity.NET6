@@ -16,19 +16,28 @@ namespace ASP.NET_Core_Identity_Demo.Controllers
 
         [HttpPost]
         public IActionResult GetWeather(Root rootWeather)
-        {               
-            var client = new HttpClient();
-            var url = $"https://api.openweathermap.org/data/2.5/forecast?" +
-                           $"q={rootWeather.City.Name}" +
-                           $"&appid={rootWeather.API_Key}" +
-                           $"&units=imperial";
+        {
+            try
+            {
+                var client = new HttpClient();
+                var url = $"https://api.openweathermap.org/data/2.5/forecast?" +
+                               $"q={rootWeather.City.Name}" +
+                               $"&appid={rootWeather.API_Key}" +
+                               $"&units=imperial";
 
-            var jsonResponse = client.GetStringAsync(url).Result;
-            
-            var jObj = JObject.Parse(jsonResponse);
-            
+                var jsonResponse = client.GetStringAsync(url).Result;
 
-            rootWeather = JsonConvert.DeserializeObject<Root>(jsonResponse);
+                var jObj = JObject.Parse(jsonResponse);
+
+
+                rootWeather = JsonConvert.DeserializeObject<Root>(jsonResponse);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return RedirectToAction("Index");
+            }
+            
 
             return View(rootWeather);
         }

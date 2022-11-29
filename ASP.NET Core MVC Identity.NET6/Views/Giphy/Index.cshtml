@@ -3,22 +3,22 @@
 @model GiphyAPI_Root
 
 <style>
-    .main{
+    .main {
         color: white;
         max-width: 100%;
     }
 </style>
 
 <div class="main">
-        <h1 class="display-4 center">Giphy API Demo: Cat memes</h1>
-        <div class="grid-container">
-            @foreach (var item in Model.data)
-            {
-                <div class="grid-item">
-                    <img src="@item.Images.fixed_height.url" />
-                </div>
-            }
-        </div>
+    <h1 class="display-4 center">Giphy API Demo: Cat memes</h1>
+    <div class="grid-container_2columns">
+        @foreach (var item in Model.data)
+        {
+            <div class="grid-item">
+                <img src="@item.Images.fixed_height.url" />
+            </div>
+        }
+    </div>
 
     <br />
 </div>
