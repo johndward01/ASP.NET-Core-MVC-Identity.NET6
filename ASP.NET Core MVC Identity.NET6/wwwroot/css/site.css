@@ -4,27 +4,27 @@ html, body {
     color: white;
     scrollbar-color: rgb(128, 128, 128);
 }
+a, .nav-link {
+    color: rgba(255, 255, 255, 0.8);
+}
 
+/*========== Grid ============*/
 .grid-container_2columns {
     display: inline-grid;
     grid-template-columns: auto auto;
 }
-
 .grid-container_3columns {
     display: inline-grid;
     grid-template-columns: auto auto auto;
 }
-
 .grid-container_4columns {
     display: inline-grid;
     grid-template-columns: auto auto auto auto;
 }
-
 .grid-container_5columns {
     display: inline-grid;
     grid-template-columns: auto auto auto auto auto;
 }
-
 .grid-item {
     background-color: rgba(255, 255, 255, 0.8);
     border: 5px solid rgba(0, 0, 0, 0.8);
@@ -32,26 +32,19 @@ html, body {
     margin: 10px;
 }
 
+/*========== Scroll Bar ===========*/
 ::-webkit-scrollbar {
     width: 20px;
 }
-
 ::-webkit-scrollbar-track {
     background: #555;
 }
-
-::-webkit-scrollbar-thumb {
-    background: rgb(128, 128, 128);
-}
-
-    ::-webkit-scrollbar-thumb:hover {
-        background: #555;
-    }
-
 ::-webkit-scrollbar-corner {
     border-radius: 25px;
 }
-
-a, .nav-link {
-    color: rgba(255, 255, 255, 0.8);
+::-webkit-scrollbar-thumb {
+    background: rgb(128, 128, 128);
 }
+    ::-webkit-scrollbar-thumb:hover {
+        background: #555;
+    }

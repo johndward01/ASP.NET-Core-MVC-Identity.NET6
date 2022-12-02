@@ -3,16 +3,13 @@
 <div class="row">
     <div class="col-6">
         <h2 class="text-primary">Roles List </h2>
-    </div>
-    <div class="col-6 text-right">
-        <a asp-action="Upsert" asp-controller="Role" class="btn btn-primary">Create New Role</a>
-    </div>
+    </div>    
 </div>
 <div class="p-4 border rounded">
     @if (Model.Any())
     {
-        <table class="table table-striped border">
-            <tr class="table-secondary">
+        <table class="table table-dark border">
+            <tr>
                 <th>
                     ID
                 </th>
@@ -48,4 +45,8 @@
             }
         </table>
     }
+</div>
+<br />
+<div class="col-6 text-right">
+    <a asp-action="Upsert" asp-controller="Role" class="btn btn-primary">Create New Role</a>
 </div>
