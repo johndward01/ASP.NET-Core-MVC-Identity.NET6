@@ -46,5 +46,5 @@ a, .nav-link {
     background: rgb(128, 128, 128);
 }
     ::-webkit-scrollbar-thumb:hover {
-        background: #555;
+        background: #05133c;
     }

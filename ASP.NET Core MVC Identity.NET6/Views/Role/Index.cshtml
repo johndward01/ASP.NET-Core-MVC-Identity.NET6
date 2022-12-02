@@ -3,41 +3,29 @@
 <div class="row">
     <div class="col-6">
         <h2 class="text-primary">Roles List </h2>
-    </div>    
+    </div>
 </div>
-<div class="p-4 border rounded">
+<div class="p-4 border border-secondary rounded">
     @if (Model.Any())
     {
-        <table class="table table-dark border">
+        <table class="table table-dark border border-secondary">
             <tr>
-                <th>
-                    ID
-                </th>
-                <th>
-                    Name
-                </th>
+                <th>ID</th>
+                <th>Name</th>
                 <th></th>
             </tr>
             @foreach (var item in Model)
             {
                 <tr>
-                    <td>
-                        @item.Id
-                    </td>
-                    <td>
-                        @item.Name
-                    </td>
+                    <td>@item.Id</td>
+                    <td>@item.Name</td>
                     <td>
                         <div class="text-center">
                             <form asp-action="Delete" asp-route-id="@item.Id">
                                 <a asp-action="Upsert" asp-route-id="@item.Id" class="btn btn-info text-white" style="cursor:pointer">
                                     Edit
                                 </a>
-
-                                <button type="submit"
-                                class="btn btn-danger">
-                                    Delete
-                                </button>
+                                <button type="submit" class="btn btn-danger">Delete</button>
                             </form>
                         </div>
                     </td>
