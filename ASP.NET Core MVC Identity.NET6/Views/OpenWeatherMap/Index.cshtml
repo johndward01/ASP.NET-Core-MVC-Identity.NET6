@@ -1,25 +1,26 @@
 ﻿@using ASP.NET_Core_Identity_Demo.Models.Weather
 @model Root
 
-<div class="container text-white-50 mucho-margin-top">
-    <div class="mb-4"><br /><br /></div>
+<div class="container vh-100 mt-3">
     <h1 class="display-2 text-white text-center">OpenWeatherMap API Demo</h1>
-    <h2>Getting the weather by City Name.</h2>
-    @using (Html.BeginForm("GetWeather", "OpenWeatherMap", FormMethod.Post))
-    {
-        <table>
-            <tr>
-                <td>Enter City Name: </td>
-                <td>@Html.TextBoxFor(weather => weather.City.Name)</td>
-            </tr>
-            <tr>
-                <td>Enter the API Key: </td>
-                <td>@Html.TextBoxFor(weather => weather.API_Key)</td>
-            </tr>
-            <tr>
-                <td colspan="2"><input type="submit" value="Submit Form" /></td>
-            </tr>
-        </table>
-    }
+    <div class="border border-secondary p-2 mt-5">
+        <h2>Getting the weather by City Name <br />(5 Day Forecast)</h2>
+        @using (Html.BeginForm("GetWeather", "OpenWeatherMap", FormMethod.Post))
+        {
+            <table>
+                <tr>
+                    <td>Enter City Name: </td>
+                    <td>@Html.TextBoxFor(weather => weather.City.Name)</td>
+                </tr>
+                <tr>
+                    <td>Enter the API Key: </td>
+                    <td>@Html.TextBoxFor(weather => weather.API_Key)</td>
+                </tr>
+                <tr>
+                    <td><input class="btn btn-primary" type="submit"></input></td>
+                </tr>
+            </table>
+        }
+    </div>
 </div>
 
