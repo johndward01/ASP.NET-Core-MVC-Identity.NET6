@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace ASP.NET_Core_Identity_Demo.Models.Weather
 {
