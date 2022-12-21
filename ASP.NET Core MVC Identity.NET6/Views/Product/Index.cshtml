@@ -1,24 +1,25 @@
 ﻿@using ASP.NET_Core_Identity_Demo.Models
 @model IEnumerable<Product>
 
-<div class="container text-white-50 mucho-margin-top">
+<div class="container-fluid text-white-50 mucho-margin-top">
     <div class="flex-row">
         <h1 class="display-3 text-white">Products</h1>
 
         <form asp-action="Index" method="get">
             <div class="form-actions no-color">
-                <p>
-                    Find by name: <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
-                    <input type="submit" value="Search" class="btn btn-outline-primary mx-2" />
-                    <a asp-action="Index">Back to Full List</a>
-                </p>
+                <h3>Find by name:</h3>
+                <input class="dark-form" type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
+                <input type="submit" value="Search" class="btn btn-outline-primary mx-2" />
+                <a asp-action="Index"><span class="fs-3 ms-5"><i class="fa-solid fa-arrows-rotate"></i> Back to Full List</span></a>
+                <br />
+                <br />
             </div>
         </form>
 
         <div>
-            <a href="/Product/InsertProduct/">Create a New Product</a>
+            <a href="/Product/InsertProduct/"><h3>Create a New Product <i class="fa-solid fa-plus"></i></h3></a>
         </div>
-    </div>  
+    </div>
 
 
     <br />

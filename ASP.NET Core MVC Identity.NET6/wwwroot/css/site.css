@@ -7,6 +7,13 @@ html, body {
 }
 a, .nav-link {
     color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+}
+
+.dark-form {
+    color: rgb(209, 205, 199);
+    background-color: rgb(24, 26, 27);
+    border-color: rgb(60, 65, 68);
 }
 
 /*========== Grid ============*/
@@ -49,3 +56,11 @@ a, .nav-link {
     ::-webkit-scrollbar-thumb:hover {
         background: #0e0e10;
     }
+
+
+/*=========== Dark Form ============*/
+.dark-form {
+    color: rgb(209, 205, 199);
+    background-color: rgb(24, 26, 27);
+    border-color: rgb(60, 65, 68);
+}

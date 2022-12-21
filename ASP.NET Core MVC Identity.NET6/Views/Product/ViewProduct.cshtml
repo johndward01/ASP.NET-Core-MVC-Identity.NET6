@@ -6,10 +6,10 @@
     <div>
         <br />
         <br />
-        <h3>@Model.Name Information</h3>
+        <p class="display-1">@Model.Name</p>
     </div>
 
-    <table class="table">
+    <table class="table table-dark my-5">
         <tr>
             <th>Product ID</th>
             <th>Name</th>
@@ -28,18 +28,24 @@
         </tr>
 
     </table>
+    
+    <div class="row">
+        <div class="col-6">
+            <a href="/Product/UpdateProduct/@Model.ProductID"><div class="btn btn-primary">Update this Product</div></a>
+        </div>
+        <div class="col-6">
+            <form>
+                <input type="hidden" asp-for="ProductID" value="@Model.ProductID" />
+                <input class="btn btn-danger" type="submit" onclick="return confirm('Are you sure?')" value="Delete this product" />
+            </form>
+        </div>
+    </div>
 
-    <div style="display: block">
-        <a href="/Product/UpdateProduct/@Model.ProductID">Update this Product</a>
-    </div>
+    
+
     <br />
-    <div style="display: block">
-        @using (Html.BeginForm("DeleteProduct", "Product", "Post"))
-        {
-            <input type="hidden" asp-for="ProductID" value="@Model.ProductID" />
-            <input type="submit" onclick="return confirm('Are you sure?')" value="Delete this product" />
-        }
-    </div>
+
+    
 
 
 </div>
