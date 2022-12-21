@@ -34,7 +34,7 @@
             <a href="/Product/UpdateProduct/@Model.ProductID"><div class="btn btn-primary">Update this Product</div></a>
         </div>
         <div class="col-6">
-            <form>
+            <form asp-action="DeleteProduct" asp-controller="Product" method="post">
                 <input type="hidden" asp-for="ProductID" value="@Model.ProductID" />
                 <input class="btn btn-danger" type="submit" onclick="return confirm('Are you sure?')" value="Delete this product" />
             </form>

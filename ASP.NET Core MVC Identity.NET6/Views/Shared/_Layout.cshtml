@@ -35,17 +35,17 @@
                                 <a class="nav-link" asp-area="" asp-controller="Product" asp-action="Index"><i class="fas fa-shopping-bag"></i> Products</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" asp-area="" title="Giphy API Demo" asp-controller="Giphy" asp-action="Index"><i class="fa-solid fa-image"></i> Giphy</a>
+                                <a class="nav-link" asp-area="" asp-controller="Giphy" asp-action="Index"><i class="fa-solid fa-image"></i> Giphy</a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item me-auto">
                                 <a class="nav-link" asp-area="" asp-controller="OpenWeatherMap" asp-action="Index"><i class="fas fa-cloud-sun-rain"></i> Weather</a>
                             </li>
                             @if (User.IsInRole("admin"))
-                            {
+                            {                                
                                 <li class="nav-item">
                                     <a class="nav-link" asp-area="" asp-controller="User" asp-action="Index"><i class="fa-solid fa-users"></i> Users</a>
                                 </li>
-                                <li class="nav-item me-auto">
+                                <li class="nav-item">
                                     <a class="nav-link " asp-controller="Role" asp-action="Index"><i class="fa-solid fa-users-between-lines"></i> Roles</a>
                                 </li>
                             }
