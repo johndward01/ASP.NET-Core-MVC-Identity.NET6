@@ -65,7 +65,7 @@ namespace ASP.NET_Core_Identity_Demo.Controllers
             return View(products);
         }
 
-        //[Authorize]
+        
         public IActionResult ViewProduct(int id)
         {
             var product = _repo.GetProduct(id);
@@ -85,7 +85,7 @@ namespace ASP.NET_Core_Identity_Demo.Controllers
 
             return View(prod);
         }
-
+        
         //[Authorize]
         public IActionResult UpdateProductToDatabase(Product product)
         {

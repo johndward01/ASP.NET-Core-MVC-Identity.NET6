@@ -3,11 +3,19 @@ using Microsoft.AspNetCore.Mvc;
 using System.Net.Http;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.Data;
 
 namespace ASP.NET_Core_Identity_Demo.Controllers
 {
     public class OpenWeatherMap : Controller
     {
+        private readonly IDbConnection _connection;
+
+        public OpenWeatherMap(IDbConnection connection)
+        {
+            _connection = connection;
+        }
+
         public IActionResult Index()
         {
             var weather = new Root();

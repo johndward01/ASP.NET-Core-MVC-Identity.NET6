@@ -1,51 +1,19 @@
 ﻿@using ASP.NET_Core_Identity_Demo.Models
 @model Product
 
-<div class="container mucho-margin-top">
+<h3>@Model.Name Information</h3>
+<table class="table table-dark my-5">
+    <tr>
+        <th>Product ID</th> <th>Name</th> <th>Price</th>
+        <th>Category ID</th> <th>On Sale</th> <th>StockLevel</th>
+    </tr>
+    <tr>
+        <td>@Model.ProductID</td> <td>@Model.Name</td> <td>@Model.Price</td>
+        <td>@Model.CategoryID</td> <td>@Model.OnSale</td> <td>@Model.StockLevel</td>
+    </tr>
+</table>
 
-    <div>
-        <br />
-        <br />
-        <p class="display-1">@Model.Name</p>
-    </div>
-
-    <table class="table table-dark my-5">
-        <tr>
-            <th>Product ID</th>
-            <th>Name</th>
-            <th>Price</th>
-            <th>Category ID</th>
-            <th>On Sale</th>
-            <th>StockLevel</th>
-        </tr>
-        <tr>
-            <td>@Model.ProductID</td>
-            <td>@Model.Name</td>
-            <td>@Model.Price</td>
-            <td>@Model.CategoryID</td>
-            <td>@Model.OnSale</td>
-            <td>@Model.StockLevel</td>
-        </tr>
-
-    </table>
-    
-    <div class="row">
-        <div class="col-6">
-            <a href="/Product/UpdateProduct/@Model.ProductID"><div class="btn btn-primary">Update this Product</div></a>
-        </div>
-        <div class="col-6">
-            <form asp-action="DeleteProduct" asp-controller="Product" method="post">
-                <input type="hidden" asp-for="ProductID" value="@Model.ProductID" />
-                <input class="btn btn-danger" type="submit" onclick="return confirm('Are you sure?')" value="Delete this product" />
-            </form>
-        </div>
-    </div>
-
-    
-
-    <br />
-
-    
-
-
+<div class="btn btn-success">
+    @Html.ActionLink("Update", "UpdateProduct", "Product", new {id = Model.ProductID})
 </div>
+

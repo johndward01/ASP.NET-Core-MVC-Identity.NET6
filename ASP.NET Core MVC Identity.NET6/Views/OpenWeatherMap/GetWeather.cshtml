@@ -50,26 +50,30 @@
 </div>
 
 <div class="container-fluid mt-5 border border-secondary border-4">
-    <div class="my-3">
-        <h1>Day @(day++)</h1>
-    </div>
-    <div class="row row-cols-3">
-        @for (int i = 8; i < 16; i++)
-        {
-            <div class="my-1">
-                <div class="col my-1">
-                    <div class="border border-secondary p-2">
-                        <h5>@Model.List[i].Dt_txt</h5>
-                        <p class="p-1">Cloudiness: @Model.List[i].Clouds.All%</p>
-                        <p class="p-1">Temperature: @Model.List[i].Main.Temp</p>
-                        <p class="p-1">Feels Like: @Model.List[i].Main.Feels_like</p>
-                        <p class="p-1">Humidity: @Model.List[i].Main.Humidity%</p>
-                        <p class="p-1">Precipitation: @Model.List[i].Pop %</p>
+    <div class="row">
+        <div class="my-3">
+            <h1>Day @(day++)</h1>
+        </div>
+        <div class="row row-cols-3">
+            @for (int i = 8; i < 16; i++)
+            {
+                <div class="my-1">
+                    <div class="col my-1">
+                        <div class="border border-secondary p-2">
+                            <h5>@Model.List[i].Dt_txt</h5>
+                            <p class="p-1">Cloudiness: @Model.List[i].Clouds.All%</p>
+                            <p class="p-1">Temperature: @Model.List[i].Main.Temp</p>
+                            <p class="p-1">Feels Like: @Model.List[i].Main.Feels_like</p>
+                            <p class="p-1">Humidity: @Model.List[i].Main.Humidity%</p>
+                            <p class="p-1">Precipitation: @Model.List[i].Pop %</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-        }
+            }
+        </div>
     </div>
+
+    
 </div>
 
 <div class="container-fluid mt-5 border border-secondary border-4">

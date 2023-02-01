@@ -21,7 +21,8 @@ namespace ASP.NET_Core_Identity_Demo
 
         public Product GetProduct(int id)
         {
-            return _conn.QuerySingle<Product>("SELECT * FROM PRODUCTS WHERE PRODUCTID = @id",
+            return _conn.QuerySingle<Product>
+                ("SELECT * FROM products WHERE ProductID = @id",
                 new { id = id });
         }
 
