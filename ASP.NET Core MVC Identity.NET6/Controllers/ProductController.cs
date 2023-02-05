@@ -28,40 +28,9 @@ namespace ASP.NET_Core_Identity_Demo.Controllers
         //    return View(p);
         //}
 
-        public IActionResult Index(string sortOrder, string searchString)
+        public IActionResult Index(string sortOrder)
         {
-            ViewData["NameSortParam"] = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            ViewData["IDSortParam"] = sortOrder == "ID" ? "id_desc" : "ID";
-            ViewData["PriceSortParam"] = sortOrder == "Price" ? "price_desc" : "Price";
-            ViewData["CategorySortParam"] = sortOrder == "CategoryID" ? "category-id_desc" : "CategoryID";
-            ViewData["OnSaleSortParam"] = sortOrder == "OnSale" ? "on-sale_desc" : "OnSale";
-            ViewData["StockLevelSortParam"] = sortOrder == "StockLevel" ? "stock-level_desc" : "StockLevel";
-            ViewData["CurrentFilter"] = searchString;
-
             var products = _repo.GetAllProducts();
-
-            if (!string.IsNullOrEmpty(searchString))
-            {
-                products = products.Where(s => s.Name.Contains(searchString));
-            }
-
-            products = sortOrder switch
-            {
-                "ID" => products.OrderBy(s => s.ProductID),
-                "id_desc" => products.OrderByDescending(s => s.ProductID),
-                "Name" => products.OrderBy(s => s.Name),
-                "name_desc" => products.OrderByDescending(s => s.Name),
-                "Price" => products.OrderBy(s => s.Price),
-                "price_desc" => products.OrderByDescending(s => s.Price),
-                "CategoryID" => products.OrderBy(s => s.CategoryID),
-                "category-id_desc" => products.OrderByDescending(s => s.CategoryID),
-                "OnSale" => products.OrderBy(s => s.OnSale),
-                "on-sale_desc" => products.OrderByDescending(s => s.OnSale),
-                "StockLevel" => products.OrderBy(s => s.StockLevel),
-                "stock-level_desc" => products.OrderByDescending(s => s.StockLevel),
-                "" => products.OrderBy(s => s.Name),
-                _ => products.OrderBy(s => s.Name)
-            };
             return View(products);
         }
 
@@ -119,13 +88,6 @@ namespace ASP.NET_Core_Identity_Demo.Controllers
         }
 
 
-        public IActionResult JeremysMethod()
-        {
-            var p = new Product();
-            p.Name = "Jeremys Product";
-            p.Price = 100.00;
-            return View(p);
-        }
 
     }
 }

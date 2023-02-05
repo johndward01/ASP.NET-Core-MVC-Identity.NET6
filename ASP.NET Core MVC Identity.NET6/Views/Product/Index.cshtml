@@ -21,29 +21,31 @@
         </div>
     </div>
 
-
     <br />
+
     <table class="table table-striped table-dark table-hover">
         <tr>
-            <th><a asp-action="Index" asp-route-sortOrder="@ViewData["IDSortParam"]">@Html.DisplayNameFor(product => product.ProductID)</a></th>
-            <th><a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParam"]">@Html.DisplayNameFor(product => product.Name)</a></th>
-            <th><a asp-action="Index" asp-route-sortOrder="@ViewData["PriceSortParam"]">@Html.DisplayNameFor(product => product.Price)</a></th>
-            <th><a asp-action="Index" asp-route-sortOrder="@ViewData["CategorySortParam"]">@Html.DisplayNameFor(product => product.CategoryID)</a></th>
-            <th><a asp-action="Index" asp-route-sortOrder="@ViewData["OnSaleSortParam"]">@Html.DisplayNameFor(product => product.OnSale)</a></th>
-            <th><a asp-action="Index" asp-route-sortOrder="@ViewData["StockLevelSortParam"]">@Html.DisplayNameFor(product => product.StockLevel)</a></th>
+            <th>ProductID</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>CategoryID</th>
+            <th>OnSale</th>
+            <th>StockLevel</th>
         </tr>
-
-        @foreach (var product in Model)
-        {
-            <tr>
-                <td><a href=/Product/ViewProduct/@product.ProductID>@product.ProductID</a></td>
-                <td>@product.Name</td>
-                <td>@product.Price</td>
-                <td>@product.CategoryID</td>
-                <td>@product.OnSale</td>
-                <td>@product.StockLevel</td>
-                <td><a href="/ShoppingCart/AddToCart/@product.ProductID"><i class="fa-solid fa-plus"></i> <i class="fa-solid fa-cart-shopping"></i></a></td>
-            </tr>
-        }
+        <tbody>
+            @foreach (var product in Model)
+            {
+                <tr>
+                    <td><a href=/Product/ViewProduct/@product.ProductID>@product.ProductID</a></td>
+                    <td>@product.Name</td>
+                    <td>@product.Price</td>
+                    <td>@product.CategoryID</td>
+                    <td>@product.OnSale</td>
+                    <td>@product.StockLevel</td>
+                    <td><a href="/ShoppingCart/AddToCart/@product.ProductID"><i class="fa-solid fa-plus"></i> <i class="fa-solid fa-cart-shopping"></i></a></td>
+                </tr>
+            }
+        </tbody>
     </table>
+
 </div>
