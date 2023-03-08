@@ -28,9 +28,14 @@ namespace ASP.NET_Core_Identity_Demo.Controllers
         //    return View(p);
         //}
 
-        public IActionResult Index(string sortOrder)
+        public IActionResult Index(string searchString)
         {
             var products = _repo.GetAllProducts();
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                products.Where(x => x.Name.Contains(searchString));
+            }
             return View(products);
         }
 

@@ -10,20 +10,16 @@
                 <h3>Find by name:</h3>
                 <input class="dark-form" type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
                 <input type="submit" value="Search" class="btn btn-outline-primary mx-2" />
-                <a asp-action="Index"><span class="fs-3 ms-5"><i class="fa-solid fa-arrows-rotate"></i> Back to Full List</span></a>
-                <br />
-                <br />
             </div>
         </form>
 
-        <div>
-            <a href="/Product/InsertProduct/"><h3>Create a New Product <i class="fa-solid fa-plus"></i></h3></a>
-        </div>
+        <a href="/Product/InsertProduct" >Create a new Product </a>
+        
     </div>
 
     <br />
 
-    <table class="table table-striped table-dark table-hover">
+    <table id="productTable" class="table table-striped table-dark table-hover">
         <tr>
             <th>ProductID</th>
             <th>Name</th>
@@ -49,3 +45,4 @@
     </table>
 
 </div>
+
