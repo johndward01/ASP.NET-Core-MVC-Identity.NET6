@@ -130,18 +130,20 @@ public class AccountController : Controller
             await _roleManager.CreateAsync(new IdentityRole("Standard"));
         }
 
-        var listItems = new List<SelectListItem>();
-        listItems.Add(new SelectListItem()
+        var listItems = new List<SelectListItem>
         {
-            Value = "Admin",
-            Text = "Admin"
-        });
+            new SelectListItem()
+            {
+                Value = "Admin",
+                Text = "Admin"
+            },
 
-        listItems.Add(new SelectListItem()
-        {
-            Value = "Standard",
-            Text = "Standard"
-        });
+            new SelectListItem()
+            {
+                Value = "Standard",
+                Text = "Standard"
+            }
+        };
 
         RegisterViewModel registerViewModel = new()
         {
@@ -159,6 +161,7 @@ public class AccountController : Controller
         if (ModelState.IsValid)
         {
             var user = new AppUser { Email = registerViewModel.Email, UserName = registerViewModel.UserName };
+            // TODO: Check if email already exists otherwise multiple users with the same email causes crash (Exception)
             var result = await _userManager.CreateAsync(user, registerViewModel.Password);
             if (result.Succeeded)
             {
@@ -166,7 +169,14 @@ public class AccountController : Controller
                 await _signInManager.SignInAsync(user, isPersistent: false);
                 return LocalRedirect(returnUrl);
             }
-            ModelState.AddModelError("Password", "User could not be created. Password not unique enough");
+            if (result.Errors.First().Code == "DuplicateUserName")
+            {
+                ModelState.AddModelError("Username", $"Username {user.UserName} is already taken.");
+            }
+            else
+            {
+                ModelState.AddModelError("Password", "User could not be created. Password not unique enough");
+            }
         }
 
         return View(registerViewModel);
