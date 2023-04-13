@@ -34,7 +34,7 @@ namespace ASP.NET_Core_Identity_Demo.Controllers
 
             if (!string.IsNullOrEmpty(searchString))
             {
-                products.Where(x => x.Name.Contains(searchString));
+                products = products.Where(x => x.Name.Contains(searchString));
             }
             return View(products);
         }
