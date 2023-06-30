@@ -9,13 +9,8 @@
     }
 </style>
 
-<div>
-    <br />
-    <br />
-</div>
-
-<div class="container mucho-margin-top">
-    <h1 class="display-3">Create a New Product</h1>
+<div class="container">
+    <h1 class="display-2 text-center">Create a New Product</h1>
     <form asp-action="InsertProductToDatabase" asp-controller="Product" method="post">
         <input asp-for="ProductID" type="hidden" value="" />
         <label asp-for="Name" class="form-label my-2">Name</label>

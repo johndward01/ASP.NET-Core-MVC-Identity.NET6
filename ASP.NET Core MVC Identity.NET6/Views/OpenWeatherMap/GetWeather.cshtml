@@ -1,149 +1,76 @@
 ﻿@using ASP.NET_Core_Identity_Demo.Models.Weather
 @model Root
 
-
-@*<iframe width="650" height="450" src="https://embed.windy.com/embed2.html?lat=33.324&lon=-86.970&detailLat=33.324&detailLon=-86.970&width=650&height=450&zoom=5&level=surface&overlay=wind&product=ecmwf&menu=&message=&marker=&calendar=now&pressure=&type=map&location=coordinates&detail=&metricWind=default&metricTemp=default&radarRange=-1" frameborder="0"></iframe>*@
-
-
 @{
-    int day = 1;
+    string GetWeatherIcon(double precipitation)
+    {
+        var image = precipitation switch
+        {
+            >= .75 => "https://assets.msn.com/weathermapdata/1/static/svg/72/v6/card/ModerateRainV2.svg",
+            <= .50 => "https://assets.msn.com/weathermapdata/1/static/svg/72/v6/card/SunnyDayV3.svg",
+            _ => "https://assets.msn.com/weathermapdata/1/static/svg/72/v6/card/CloudyV3.svg",
+        };
+        return image;
+    }
 }
-<div class="display-1 mt-1">
+
+<div class="display-1 text-center mt-3">
     <p>5 Day Forecast</p>
 </div>
 
-<img src="https://assets.msn.com/weathermapdata/1/static/svg/72/v6/card/ClearNightV3.svg" />
-<img src="https://assets.msn.com/weathermapdata/1/static/svg/72/v6/card/MostlyClearNight.svg" />
-<img src="https://assets.msn.com/weathermapdata/1/static/svg/72/v6/card/PartlyCloudyNightV2.svg" />
-<img src="https://assets.msn.com/weathermapdata/1/static/svg/72/v6/card/MostlyCloudyNightV2.svg" />
-<img src="https://assets.msn.com/weathermapdata/1/static/svg/72/v6/card/RainShowersNightV2.svg" />
-<hr />
-<img src="https://assets.msn.com/weathermapdata/1/static/svg/72/v6/card/CloudyV3.svg" />
-<img src="https://assets.msn.com/weathermapdata/1/static/svg/72/v6/card/LightRainV3.svg" />
-<img src="https://assets.msn.com/weathermapdata/1/static/svg/72/v6/card/HeavyDrizzle.svg" />
-<img src="https://assets.msn.com/weathermapdata/1/static/svg/72/v6/card/ModerateRainV2.svg" />
-<hr />
-<img src="https://assets.msn.com/weathermapdata/1/static/svg/72/v6/card/SunnyDayV3.svg" />
-<img src="https://assets.msn.com/weathermapdata/1/static/svg/72/v6/card/MostlySunnyDay.svg" />
-<img src="https://assets.msn.com/weathermapdata/1/static/svg/72/v6/card/PartlyCloudyDayV3.svg" />
-<img src="https://assets.msn.com/weathermapdata/1/static/svg/72/v6/card/MostlyCloudyDayV2.svg" />
-
-<div class="container-fluid mt-5 border border-secondary border-4">
-    <div class="my-3">
-        <h1>Day @(day++)</h1>
-    </div>
-    <div class="row row-cols-3">
-        @for (int i = 0; i < 8; i++)
-        {
-            <div class="my-1">
-                <div class="col my-1">
-                    <div class="border border-secondary p-2">
-                        <h5>@Model.List[i].Dt_txt</h5>
-                        <p class="p-1">Cloudiness: @Model.List[i].Clouds.All%</p>
-                        <p class="p-1">Temperature: @Model.List[i].Main.Temp</p>
-                        <p class="p-1">Feels Like: @Model.List[i].Main.Feels_like</p>
-                        <p class="p-1">Humidity: @Model.List[i].Main.Humidity%</p>
-                        <p class="p-1">Precipitation: @Model.List[i].Pop%</p>
-                    </div>
-                </div>
+<div class="container-fluid mt-5">
+    <div class="row row-cols-5">
+        <div class="col my-1">
+            <div class="border border-secondary p-2">
+                <h5>@Model.List[0].Dt_txt</h5>
+                <p class="p-1">Cloudiness: @Model.List[0].Clouds.All%</p>
+                <p class="p-1">Temp: @Model.List[0].Main.Temp</p>
+                <img src="@GetWeatherIcon(Model.List[0].Pop)" />
             </div>
-        }
-    </div>
-</div>
-
-<div class="container-fluid mt-5 border border-secondary border-4">
-    <div class="row">
-        <div class="my-3">
-            <h1>Day @(day++)</h1>
         </div>
-        <div class="row row-cols-3">
-            @for (int i = 8; i < 16; i++)
-            {
-                <div class="my-1">
-                    <div class="col my-1">
-                        <div class="border border-secondary p-2">
-                            <h5>@Model.List[i].Dt_txt</h5>
-                            <p class="p-1">Cloudiness: @Model.List[i].Clouds.All%</p>
-                            <p class="p-1">Temperature: @Model.List[i].Main.Temp</p>
-                            <p class="p-1">Feels Like: @Model.List[i].Main.Feels_like</p>
-                            <p class="p-1">Humidity: @Model.List[i].Main.Humidity%</p>
-                            <p class="p-1">Precipitation: @Model.List[i].Pop %</p>
-                        </div>
-                    </div>
-                </div>
-            }
+        <div class="col my-1">
+            <div class="border border-secondary p-2">
+                <h5>@Model.List[8].Dt_txt</h5>
+                <p class="p-1">Cloudiness: @Model.List[8].Clouds.All%</p>
+                <p class="p-1">Temp: @Model.List[8].Main.Temp</p>
+                <img src="@GetWeatherIcon(Model.List[8].Pop)" />
+            </div>
+        </div>
+        <div class="col my-1">
+            <div class="border border-secondary p-2">
+                <h5>@Model.List[16].Dt_txt</h5>
+                <p class="p-1">Cloudiness: @Model.List[16].Clouds.All%</p>
+                <p class="p-1">Temp: @Model.List[16].Main.Temp</p>
+                <img src="@GetWeatherIcon(Model.List[16].Pop)" />
+            </div>
+        </div>
+        <div class="col my-1">
+            <div class="border border-secondary p-2">
+                <h5>@Model.List[24].Dt_txt</h5>
+                <p class="p-1">Cloudiness: @Model.List[24].Clouds.All%</p>
+                <p class="p-1">Temp: @Model.List[24].Main.Temp</p>
+                <img src="@GetWeatherIcon(Model.List[24].Pop)" />
+            </div>
+        </div>
+        <div class="col my-1">
+            <div class="border border-secondary p-2">
+                <h5>@Model.List[32].Dt_txt</h5>
+                <p class="p-1">Cloudiness: @Model.List[32].Clouds.All%</p>
+                <p class="p-1">Temp: @Model.List[32].Main.Temp</p>
+                <img src="@GetWeatherIcon(Model.List[32].Pop)" />
+            </div>
         </div>
     </div>
-
-    
-</div>
-
-<div class="container-fluid mt-5 border border-secondary border-4">
-    <div class="my-3">
-        <h1>Day @(day++)</h1>
-    </div>
-    <div class="row row-cols-3">
-        @for (int i = 16; i < 24; i++)
-        {
-            <div class="my-1">
-                <div class="col my-1">
-                    <div class="border border-secondary p-2">
-                        <h5>@Model.List[i].Dt_txt</h5>
-                        <p class="p-1">Cloudiness: @Model.List[i].Clouds.All%</p>
-                        <p class="p-1">Temperature: @Model.List[i].Main.Temp</p>
-                        <p class="p-1">Feels Like: @Model.List[i].Main.Feels_like</p>
-                        <p class="p-1">Humidity: @Model.List[i].Main.Humidity%</p>
-                        <p class="p-1">Precipitation: @Model.List[i].Pop %</p>
-                    </div>
-                </div>
-            </div>
-        }
-    </div>
-</div>
-
-<div class="container-fluid mt-5 border border-secondary border-4">
-    <div class="my-3">
-        <h1>Day @(day++)</h1>
-    </div>
-    <div class="row row-cols-3">
-        @for (int i = 24; i < 32; i++)
-        {
-            <div class="my-1">
-                <div class="col my-1">
-                    <div class="border border-secondary p-2">
-                        <h5>@Model.List[i].Dt_txt</h5>
-                        <p class="p-1">Cloudiness: @Model.List[i].Clouds.All%</p>
-                        <p class="p-1">Temperature: @Model.List[i].Main.Temp</p>
-                        <p class="p-1">Feels Like: @Model.List[i].Main.Feels_like</p>
-                        <p class="p-1">Humidity: @Model.List[i].Main.Humidity%</p>
-                        <p class="p-1">Precipitation: @Model.List[i].Pop %</p>
-                    </div>
-                </div>
-            </div>
-        }
-    </div>
 </div>
 
 
-<div class="container-fluid mt-5 border border-secondary border-4">
-    <div class="my-3">
-        <h1>Day @(day++)</h1>
-    </div>
-    <div class="row row-cols-3">
-        @for (int i = 32; i < 40; i++)
-        {
-            <div class="my-1">
-                <div class="col my-1">
-                    <div class="border border-secondary p-2">
-                        <h5>@Model.List[i].Dt_txt</h5>
-                        <p class="p-1">Cloudiness: @Model.List[i].Clouds.All%</p>
-                        <p class="p-1">Temperature: @Model.List[i].Main.Temp</p>
-                        <p class="p-1">Feels Like: @Model.List[i].Main.Feels_like</p>
-                        <p class="p-1">Humidity: @Model.List[i].Main.Humidity%</p>
-                        <p class="p-1">Precipitation: @Model.List[i].Pop %</p>
-                    </div>
-                </div>
-            </div>
-        }
-    </div>
-</div>
+
+
+
+
+
+
+
+
+
+

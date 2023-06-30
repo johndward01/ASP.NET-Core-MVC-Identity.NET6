@@ -4,6 +4,7 @@ using System.Net.Http;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Data;
+using System.Diagnostics;
 
 namespace ASP.NET_Core_Identity_Demo.Controllers
 {
@@ -34,6 +35,7 @@ namespace ASP.NET_Core_Identity_Demo.Controllers
                                $"&units=imperial";
 
                 var jsonResponse = client.GetStringAsync(url).Result;
+                Console.WriteLine(jsonResponse);
 
                 var jObj = JObject.Parse(jsonResponse);
 
