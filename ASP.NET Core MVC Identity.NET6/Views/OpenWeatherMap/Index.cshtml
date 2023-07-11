@@ -1,26 +1,39 @@
 ﻿@using ASP.NET_Core_Identity_Demo.Models.Weather
 @model Root
 
+<style>
+    form {
+        display: table;
+    }
+
+    p {
+        display: table-row;        
+    }
+
+    label {
+        display: table-cell;
+    }
+
+    input {
+        display: table-cell;
+    }
+</style>
+
 <div class="vh-100 mt-3">
-    <h1 class="display-2 text-white text-center">OpenWeatherMap API Demo</h1>
-    <div class="row p-2 mt-5">
-        <form asp-action="GetWeather" asp-controller="OpenWeatherMap" method="post">
-            <h2 class="display-4">5 Day Forecast</h2>
-            <div class="col my-2 fs-4">
-                <div asp-validation-summary="All" class="text-danger"></div>
-                <label asp-for="City.Name">City Name: </label>
-                <input asp-for="City.Name" class="dark-form" />
-            </div>
-            <div class="col my-2 fs-4">
-                <label asp-for="API_Key">API Key: </label>
-                <input asp-for="API_Key" class="dark-form" />
-                <br />
-                <br />
-                <div class="d-grid w-25">
-                    <button class="btn btn-success" type="submit">Submit</button>
-                </div>
-            </div>
-        </form>
-    </div>
+    <h1 class="display-2 mb-5 text-center">OpenWeatherMap API Demo</h1>
+
+    <h2 class="display-6">Get the 5 Day Forecast</h2>
+    <form asp-action="GetWeather" asp-controller="OpenWeatherMap" method="post">
+        <p>
+            <label asp-for="City.Name">City Name: </label> <span class="me-2"></span>
+            <input asp-for="City.Name" class="dark-form" />
+        </p>
+        <p>
+            <label asp-for="API_Key">API Key: </label> <span class="me-2"></span>
+            <input asp-for="API_Key" class="dark-form" />
+        </p>
+        <br />
+        <button class="btn btn-success" type="submit">Submit</button>
+    </form>
 </div>
 
