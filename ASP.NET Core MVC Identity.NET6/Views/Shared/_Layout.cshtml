@@ -26,31 +26,54 @@
                         @if (SignInManager.IsSignedIn(User))
                         {
                             <li class="nav-item">
-                                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index"><i class="fa-solid fa-house"></i> Home</a>
+                                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">
+                                    <i class="fa-solid fa-house"></i>
+                                    Home
+                                </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy"><i class="fa-solid fa-key"></i> Privacy</a>
+                                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">
+                                    <i class="fa-solid fa-key"></i>
+                                    Privacy
+                                </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" asp-area="" asp-controller="Product" asp-action="Index"><i class="fas fa-shopping-bag"></i> Products</a>
+                                <a class="nav-link" asp-area="" asp-controller="Product" asp-action="Index">
+                                    <i class="fas fa-shopping-bag"></i>
+                                    Products
+                                </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" asp-area="" asp-controller="Giphy" asp-action="Index"><i class="fa-solid fa-image"></i> Giphy</a>
+                                <a class="nav-link" asp-area="" asp-controller="Giphy" asp-action="Index">
+                                    <i class="fa-solid fa-image"></i>
+                                    Giphy
+                                </a>
                             </li>
                             <li class="nav-item me-auto">
-                                <a class="nav-link" asp-area="" asp-controller="OpenWeatherMap" asp-action="Index"><i class="fas fa-cloud-sun-rain"></i> Weather</a>
+                                <a class="nav-link" asp-area="" asp-controller="OpenWeatherMap" asp-action="Index">
+                                    <i class="fas fa-cloud-sun-rain"></i>
+                                    Weather
+                                </a>
                             </li>
                             @if (User.IsInRole("admin"))
-                            {                                
+                            {
                                 <li class="nav-item">
-                                    <a class="nav-link" asp-area="" asp-controller="User" asp-action="Index"><i class="fa-solid fa-users"></i> Users</a>
+                                    <a class="nav-link" asp-area="" asp-controller="User" asp-action="Index">
+                                        <i class="fa-solid fa-users"></i>
+                                        Users
+                                    </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link " asp-controller="Role" asp-action="Index"><i class="fa-solid fa-users-between-lines"></i> Roles</a>
+                                    <a class="nav-link " asp-controller="Role" asp-action="Index">
+                                        <i class="fa-solid fa-users-between-lines"></i>
+                                        Roles
+                                    </a>
                                 </li>
                             }
                             <li class="nav-item">
-                                <a class="nav-link text-success" asp-controller="Home" asp-action="Index"><i class="fa-solid fa-user"></i> &nbsp; @UserManager.GetUserName(User)</a>
+                                <a class="nav-link text-success" asp-controller="Home" asp-action="Index">
+                                    <i class="fa-solid fa-user"></i> &nbsp; @UserManager.GetUserName(User)
+                                </a>
                             </li>
                             <li class="nav-item">
                                 <form id="logoutForm" method="post" class="form-inline" asp-controller="Account" asp-action="LogOff">
@@ -61,28 +84,52 @@
                         else
                         {
                             <li class="nav-item ms-3">
-                                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index"><i class="fa-solid fa-house"></i> Home</a>
+                                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">
+                                    <i class="fa-solid fa-house"></i> 
+                                    Home
+                                </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy"><i class="fa-solid fa-key"></i> Privacy</a>
+                                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">
+                                    <i class="fa-solid fa-key"></i> 
+                                    Privacy
+                                </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" asp-area="" asp-controller="Product" asp-action="Index"><i class="fas fa-shopping-bag"></i> Products</a>
+                                <a class="nav-link" asp-area="" asp-controller="Product" asp-action="Index">
+                                    <i class="fas fa-shopping-bag"></i> 
+                                    Products
+                                </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" asp-area="" title="Giphy API Demo" asp-controller="Giphy" asp-action="Index"><i class="fa-solid fa-image"></i> Giphy</a>
+                                <a class="nav-link" asp-area="" title="Giphy API Demo" asp-controller="Giphy" asp-action="Index">
+                                    <i class="fa-solid fa-image"></i>
+                                    Giphy
+                                </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" asp-area="" asp-controller="OpenWeatherMap" asp-action="Index"><i class="fas fa-cloud-sun-rain"></i> Weather</a>
+                                <a class="nav-link" asp-area="" asp-controller="OpenWeatherMap" asp-action="Index">
+                                    <i class="fas fa-cloud-sun-rain"></i> 
+                                    Weather
+                                </a>
                             </li>
                             <li class="nav-item me-auto">
-                                <a class="nav-link" asp-area="" asp-controller="ThreeJS" asp-action="Index"><i class="fa-brands fa-js"></i> Three</a>
+                                <a class="nav-link" asp-area="" asp-controller="ThreeJS" asp-action="Index">
+                                    <i class="fa-brands fa-js"></i> 
+                                    Three
+                                </a>
                             </li>
                             <li>
-                                <a class="nav-link" asp-area="" asp-controller="Account" asp-action="Login"><i class="fa-solid fa-right-to-bracket"></i> Login</a>
+                                <a class="nav-link" asp-area="" asp-controller="Account" asp-action="Login">
+                                    <i class="fa-solid fa-right-to-bracket"></i> 
+                                    Login
+                                </a>
                             </li>
                             <li>
-                                <a class="nav-link" asp-area="" asp-controller="Account" asp-action="Register"><i class="fa-solid fa-user-plus"></i> Register</a>
+                                <a class="nav-link" asp-area="" asp-controller="Account" asp-action="Register">
+                                    <i class="fa-solid fa-user-plus"></i> 
+                                    Register
+                                </a>
                             </li>
                         }
                     </ul>
