@@ -2,6 +2,7 @@
 @model Root
 
 @{
+    #region weather variables
     double precipitation1 = Model.List[0].Pop * 100;
     double precipitation2 = Model.List[8].Pop * 100;
     double precipitation3 = Model.List[16].Pop * 100;
@@ -37,7 +38,7 @@
     string dateTime3 = @Model.List[16].Dt_txt;
     string dateTime4 = @Model.List[24].Dt_txt;
     string dateTime5 = @Model.List[32].Dt_txt;
-
+    #endregion
     string GetWeatherIcon(double precipitation)
     {
         var image = precipitation switch
