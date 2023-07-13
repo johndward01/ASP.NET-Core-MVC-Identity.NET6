@@ -35,10 +35,6 @@ namespace ASP.NET_Core_Identity_Demo.Controllers
                                $"&units=imperial";
 
                 var jsonResponse = client.GetStringAsync(url).Result;
-                Console.WriteLine(jsonResponse);
-
-                var jObj = JObject.Parse(jsonResponse);
-
 
                 rootWeather = JsonConvert.DeserializeObject<Root>(jsonResponse);
             }

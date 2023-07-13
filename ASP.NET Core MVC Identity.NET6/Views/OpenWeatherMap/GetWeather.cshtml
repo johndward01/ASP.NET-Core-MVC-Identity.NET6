@@ -2,6 +2,42 @@
 @model Root
 
 @{
+    double precipitation1 = Model.List[0].Pop * 100;
+    double precipitation2 = Model.List[8].Pop * 100;
+    double precipitation3 = Model.List[16].Pop * 100;
+    double precipitation4 = Model.List[24].Pop * 100;
+    double precipitation5 = Model.List[32].Pop * 100;
+
+    int cloudiness1 = @Model.List[0].Clouds.All;
+    int cloudiness2 = @Model.List[8].Clouds.All;
+    int cloudiness3 = @Model.List[16].Clouds.All;
+    int cloudiness4 = @Model.List[24].Clouds.All;
+    int cloudiness5 = @Model.List[32].Clouds.All;
+
+    double temp1 = @Model.List[0].Main.Temp;
+    double temp2 = @Model.List[8].Main.Temp;
+    double temp3 = @Model.List[16].Main.Temp;
+    double temp4 = @Model.List[24].Main.Temp;
+    double temp5 = @Model.List[32].Main.Temp;
+
+    int humidity1 = @Model.List[0].Main.Humidity;
+    int humidity2 = @Model.List[8].Main.Humidity;
+    int humidity3 = @Model.List[16].Main.Humidity;
+    int humidity4 = @Model.List[24].Main.Humidity;
+    int humidity5 = @Model.List[32].Main.Humidity;
+
+    string description1 = @Model.List[0].Weather[0].Description.ToUpper();
+    string description2 = @Model.List[8].Weather[0].Description.ToUpper();
+    string description3 = @Model.List[16].Weather[0].Description.ToUpper();
+    string description4 = @Model.List[24].Weather[0].Description.ToUpper();
+    string description5 = @Model.List[32].Weather[0].Description.ToUpper();
+
+    string dateTime1 = @Model.List[0].Dt_txt;
+    string dateTime2 = @Model.List[8].Dt_txt;
+    string dateTime3 = @Model.List[16].Dt_txt;
+    string dateTime4 = @Model.List[24].Dt_txt;
+    string dateTime5 = @Model.List[32].Dt_txt;
+
     string GetWeatherIcon(double precipitation)
     {
         var image = precipitation switch
@@ -18,57 +54,60 @@
     <p>5 Day Forecast</p>
 </div>
 
-<div class="container-fluid mt-5">
-    <div class="row row-cols-5">
-        <div class="col my-1">
-            <div class="border border-secondary p-2">
-                <h5>@Model.List[0].Dt_txt</h5>
-                <p class="p-1">Cloudiness: @Model.List[0].Clouds.All%</p>
-                <p class="p-1">Temp: @Model.List[0].Main.Temp</p>
-                <p class="p-1">Humidity : @Model.List[0].Main.Humidity%</p>
-                <p class="p-1">- @Model.List[0].Weather[0].Description</p>
-                <img src="@GetWeatherIcon(Model.List[0].Pop)" />
-            </div>
+<div class="row row-cols-5">
+    <div class="col my-1">
+        <div class="border border-secondary p-2">
+            <h5>@dateTime1</h5>
+            <p class="p-1">Cloudiness: @cloudiness1%</p>
+            <p class="p-1">Temp: @temp1°F</p>
+            <p class="p-1">Humidity: @humidity1%</p>
+            <p class="p-1">Chance of Precipitation: @precipitation1% </p>
+            <p class="p-1">@description1</p>
+            <img src="@GetWeatherIcon(Model.List[0].Pop)" />
         </div>
-        <div class="col my-1">
-            <div class="border border-secondary p-2">
-                <h5>@Model.List[8].Dt_txt</h5>
-                <p class="p-1">Cloudiness: @Model.List[8].Clouds.All%</p>
-                <p class="p-1">Temp: @Model.List[8].Main.Temp</p>
-                <p class="p-1">Humidity : @Model.List[8].Main.Humidity%</p>
-                <p class="p-1">- @Model.List[8].Weather[0].Description</p>
-                <img src="@GetWeatherIcon(Model.List[8].Pop)" />
-            </div>
+    </div>
+    <div class="col my-1">
+        <div class="border border-secondary p-2">
+            <h5>@dateTime2</h5>
+            <p class="p-1">Cloudiness: @cloudiness2%</p>
+            <p class="p-1">Temp: @temp2°F</p>
+            <p class="p-1">Humidity: @humidity2%</p>
+            <p class="p-1">Chance of Precipitation: @precipitation2%</p>
+            <p class="p-1">@description2</p>
+            <img src="@GetWeatherIcon(Model.List[8].Pop)" />
         </div>
-        <div class="col my-1">
-            <div class="border border-secondary p-2">
-                <h5>@Model.List[16].Dt_txt</h5>
-                <p class="p-1">Cloudiness: @Model.List[16].Clouds.All%</p>
-                <p class="p-1">Temp: @Model.List[16].Main.Temp</p>
-                <p class="p-1">Humidity : @Model.List[16].Main.Humidity%</p>
-                <p class="p-1">- @Model.List[16].Weather[0].Description</p>
-                <img src="@GetWeatherIcon(Model.List[16].Pop)" />
-            </div>
+    </div>
+    <div class="col my-1">
+        <div class="border border-secondary p-2">
+            <h5>@dateTime3</h5>
+            <p class="p-1">Cloudiness: @cloudiness3%</p>
+            <p class="p-1">Temp: @temp3°F</p>
+            <p class="p-1">Humidity: @humidity3%</p>
+            <p class="p-1">Chance of Precipitation: @precipitation3%</p>
+            <p class="p-1">@description3</p>
+            <img src="@GetWeatherIcon(Model.List[16].Pop)" />
         </div>
-        <div class="col my-1">
-            <div class="border border-secondary p-2">
-                <h5>@Model.List[24].Dt_txt</h5>
-                <p class="p-1">Cloudiness: @Model.List[24].Clouds.All%</p>
-                <p class="p-1">Temp: @Model.List[24].Main.Temp</p>
-                <p class="p-1">Humidity : @Model.List[24].Main.Humidity%</p>
-                <p class="p-1">- @Model.List[24].Weather[0].Description</p>
-                <img src="@GetWeatherIcon(Model.List[24].Pop)" />
-            </div>
+    </div>
+    <div class="col my-1">
+        <div class="border border-secondary p-2">
+            <h5>@dateTime4</h5>
+            <p class="p-1">Cloudiness: @cloudiness4%</p>
+            <p class="p-1">Temp: @temp4°F</p>
+            <p class="p-1">Humidity: @humidity4%</p>
+            <p class="p-1">Chance of Precipitation: @precipitation4%</p>
+            <p class="p-1">@description4</p>
+            <img src="@GetWeatherIcon(Model.List[24].Pop)" />
         </div>
-        <div class="col my-1">
-            <div class="border border-secondary p-2">
-                <h5>@Model.List[32].Dt_txt</h5>
-                <p class="p-1">Cloudiness: @Model.List[32].Clouds.All%</p>
-                <p class="p-1">Temp: @Model.List[32].Main.Temp</p>
-                <p class="p-1">Humidity : @Model.List[32].Main.Humidity%</p>
-                <p class="p-1">- @Model.List[32].Weather[0].Description</p>
-                <img src="@GetWeatherIcon(Model.List[32].Pop)" />
-            </div>
+    </div>
+    <div class="col my-1">
+        <div class="border border-secondary p-2">
+            <h5>@dateTime5</h5>
+            <p class="p-1">Cloudiness: @cloudiness5%</p>
+            <p class="p-1">Temp: @temp5°F</p>
+            <p class="p-1">Humidity: @humidity5%</p>
+            <p class="p-1">Chance of Precipitation: @precipitation5%</p>
+            <p class="p-1">@description5</p>
+            <img src="@GetWeatherIcon(Model.List[32].Pop)" />
         </div>
     </div>
 </div>
