@@ -1,25 +1,23 @@
 ﻿@using ASP.NET_Core_Identity_Demo.Models
 @model IEnumerable<Product>
 
-<div class="container-fluid text-white-50 mucho-margin-top">
+<div class="container-fluid text-white-50">
     <div class="flex-row">
-            <h1 class="display-3 text-white">Products</h1>
+        <h1 class="display-3 text-center text-white">Products</h1>
 
-            <form asp-action="Index" method="get">
-                <div class="form-actions no-color">
-                    <h3>Find by name:</h3>
-                    <input class="dark-form" type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
-                    <input type="submit" value="Search" class="btn btn-outline-primary mx-2" />
-                </div>
-            </form>
-
-        <a href="/Product/InsertProduct" >Create a new Product </a>
-        
+        <form asp-action="Index" method="get">
+            <div class="no-color">
+                <h3>Find by name:</h3>
+                <input class="dark-form" type="text" name="SearchString" />
+                <input type="submit" value="Search" class="btn btn-outline-primary me-auto" />
+                <h5><a class="me-auto" href="/Product/InsertProduct"><i class="fa fa-plus" aria-hidden="true"></i> Create a new Product </a></h5>
+            </div>
+        </form>
     </div>
 
     <br />
 
-    <table id="productTable" class="table  table-dark table-hover">
+    <table id="productTable" class="table table-dark table-hover">
         <tr>
             <th>ProductID</th>
             <th>Name</th>
@@ -27,6 +25,7 @@
             <th>CategoryID</th>
             <th>OnSale</th>
             <th>StockLevel</th>
+            <th></th>
         </tr>
         <tbody>
             @foreach (var product in Model)
@@ -38,7 +37,7 @@
                     <td><a href=/Product/ViewProduct/@product.ProductID>@product.CategoryID</a></td>
                     <td><a href=/Product/ViewProduct/@product.ProductID>@product.OnSale</a></td>
                     <td><a href=/Product/ViewProduct/@product.ProductID>@product.StockLevel</a></td>
-                    <td><a href="/ShoppingCart/AddToCart/@product.ProductID"><i class="fa-solid fa-plus"></i> <i class="fa-solid fa-cart-shopping"></i></a></td>
+                    <td><a href="/ShoppingCart/AddToCart/@product.ProductID"><i class="fa-solid fa-cart-shopping"></i> </a></td>
                 </tr>
             }
         </tbody>

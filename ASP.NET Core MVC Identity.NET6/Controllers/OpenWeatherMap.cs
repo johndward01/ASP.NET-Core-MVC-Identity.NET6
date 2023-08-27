@@ -1,10 +1,7 @@
 ﻿using ASP.NET_Core_Identity_Demo.Models.Weather;
 using Microsoft.AspNetCore.Mvc;
-using System.Net.Http;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using System.Data;
-using System.Diagnostics;
 
 namespace ASP.NET_Core_Identity_Demo.Controllers
 {
