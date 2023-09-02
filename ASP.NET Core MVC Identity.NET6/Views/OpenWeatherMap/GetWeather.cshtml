@@ -1,6 +1,23 @@
 ﻿@using ASP.NET_Core_Identity_Demo.Models.Weather
 @model Root
 
+@* <img src="https://assets.msn.com/weathermapdata/1/static/svg/72/v6/card/ClearNightV3.svg" />
+<img src="https://assets.msn.com/weathermapdata/1/static/svg/72/v6/card/MostlyClearNight.svg" />
+<img src="https://assets.msn.com/weathermapdata/1/static/svg/72/v6/card/PartlyCloudyNightV2.svg" />
+<img src="https://assets.msn.com/weathermapdata/1/static/svg/72/v6/card/MostlyCloudyNightV2.svg" />
+<img src="https://assets.msn.com/weathermapdata/1/static/svg/72/v6/card/RainShowersNightV2.svg" />
+<br />
+<img src="https://assets.msn.com/weathermapdata/1/static/svg/72/v6/card/CloudyV3.svg" />
+<img src="https://assets.msn.com/weathermapdata/1/static/svg/72/v6/card/LightRainV3.svg" />
+<img src="https://assets.msn.com/weathermapdata/1/static/svg/72/v6/card/HeavyDrizzle.svg" />
+<img src="https://assets.msn.com/weathermapdata/1/static/svg/72/v6/card/ModerateRainV2.svg" />
+<br />
+<img src="https://assets.msn.com/weathermapdata/1/static/svg/72/v6/card/SunnyDayV3.svg" />
+<img src="https://assets.msn.com/weathermapdata/1/static/svg/72/v6/card/MostlySunnyDay.svg" />
+<img src="https://assets.msn.com/weathermapdata/1/static/svg/72/v6/card/PartlyCloudyDayV3.svg" />
+<img src="https://assets.msn.com/weathermapdata/1/static/svg/72/v6/card/MostlyCloudyDayV2.svg" /> *@
+
+
 @{
     #region weather variables
     double precipitation1 = Math.Floor(Model.List[0].Pop * 100);
@@ -39,13 +56,19 @@
     string dateTime4 = @Model.List[24].Dt_txt;
     string dateTime5 = @Model.List[32].Dt_txt;
     #endregion
-    string GetWeatherIcon(double precipitation)
+    string GetWeatherIcon(string description)
     {
-        var image = precipitation switch
+        var image = description switch
         {
-            >= .75 => "https://assets.msn.com/weathermapdata/1/static/svg/72/v6/card/ModerateRainV2.svg",
-            <= .50 => "https://assets.msn.com/weathermapdata/1/static/svg/72/v6/card/SunnyDayV3.svg",
-            _ => "https://assets.msn.com/weathermapdata/1/static/svg/72/v6/card/CloudyV3.svg",
+            "CLEAR SKY" => "https://assets.msn.com/weathermapdata/1/static/svg/72/v6/card/SunnyDayV3.svg",
+            "FEW CLOUDS" => "https://assets.msn.com/weathermapdata/1/static/svg/72/v6/card/PartlyCloudyDayV3.svg",
+            "SCATTERED CLOUDS" => "https://assets.msn.com/weathermapdata/1/static/svg/72/v6/card/MostlyCloudyDayV2.svg",
+            "BROKEN CLOUDS" => "https://assets.msn.com/weathermapdata/1/static/svg/72/v6/card/CloudyV3.svg",
+            "OVERCAST CLOUDS" => "https://assets.msn.com/weathermapdata/1/static/svg/72/v6/card/CloudyV3.svg",
+            "SHOWER RAIN" => "https://assets.msn.com/weathermapdata/1/static/svg/72/v6/card/HeavyDrizzle.svg",
+            "RAIN" => "https://assets.msn.com/weathermapdata/1/static/svg/72/v6/card/ModerateRainV2.svg",
+            "THUNDERSTORM" => "https://assets.msn.com/weathermapdata/1/static/svg/72/v6/card/ModerateRainV2.svg",
+            _ => "https://assets.msn.com/weathermapdata/1/static/svg/72/v6/card/RainShowersNightV2.svg",
         };
         return image;
     }
@@ -63,7 +86,7 @@
         <p class="p-1">Humidity: @humidity1%</p>
         <p class="p-1">Precipitation: @precipitation1% </p>
         <p class="p-1">@description1</p>
-        <img src="@GetWeatherIcon(Model.List[0].Pop)" />
+        <img src="@GetWeatherIcon(description1)" />
     </div>
     <div class="border border-secondary m-2 p-2">
         <h5>@dateTime2</h5>
@@ -72,7 +95,7 @@
         <p class="p-1">Humidity: @humidity2%</p>
         <p class="p-1">Precipitation: @precipitation2%</p>
         <p class="p-1">@description2</p>
-        <img src="@GetWeatherIcon(Model.List[8].Pop)" />
+        <img src="@GetWeatherIcon(description2)" />
     </div>
     <div class="border border-secondary m-2 p-2">
         <h5>@dateTime3</h5>
@@ -81,7 +104,7 @@
         <p class="p-1">Humidity: @humidity3%</p>
         <p class="p-1">Precipitation: @precipitation3%</p>
         <p class="p-1">@description3</p>
-        <img src="@GetWeatherIcon(Model.List[16].Pop)" />
+        <img src="@GetWeatherIcon(description3)" />
     </div>
     <div class="border border-secondary m-2 p-2">
         <h5>@dateTime4</h5>
@@ -90,7 +113,7 @@
         <p class="p-1">Humidity: @humidity4%</p>
         <p class="p-1">Precipitation: @precipitation4%</p>
         <p class="p-1">@description4</p>
-        <img src="@GetWeatherIcon(Model.List[24].Pop)" />
+        <img src="@GetWeatherIcon(description4)" />
     </div>
     <div class="border border-secondary m-2 p-2">
         <h5>@dateTime5</h5>
@@ -99,7 +122,7 @@
         <p class="p-1">Humidity: @humidity5%</p>
         <p class="p-1">Precipitation: @precipitation5%</p>
         <p class="p-1">@description5</p>
-        <img src="@GetWeatherIcon(Model.List[32].Pop)" />
+        <img src="@GetWeatherIcon(description5)" />
     </div>
 </div>
 
